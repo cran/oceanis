@@ -1,4 +1,4 @@
-cf1111a7bfc814d67e636a42e199674a *DESCRIPTION
+cc8ad248ed290e2ab1bae9a275cd10a2 *DESCRIPTION
 d5d7cc0b3245cc193a190bc8c16a0bef *NAMESPACE
 84d5d4a7f322df9acb83925eec4a7b08 *R/addTiles_insee.R
 551bfaffea7fb9040e9e578af1ec5b23 *R/add_fond_osm.R
@@ -79,7 +79,6 @@ de24bf5826bd8ae2cb837c67dab1e4c1 *R/modif_blocvectorClassification.R
 f1efb1322f3ad087d1931f598dfbff9b *R/modif_canevas_MEP.R
 133509982f7bf1ed5afcfdf4563addad *R/modification.R
 6bffae23dfe3e9fed70f30daa815d7ec *R/nb_opposes.R
-f12763ec680c848fe65faa2b6cba288f *R/oceanis-internal.R
 7dc8078a90e222f26b90fc25364959b4 *R/plot_classes.R
 b81c59d0e67c9a61a35bcad0b7d4a963 *R/plot_classes_ronds.R
 ea3c9c0131402fa3d3347f5d7b00568e *R/plot_joignantes.R
@@ -118,7 +117,7 @@ f26ca24bbbd345e11285917cad7a772a *R/shiny_ronds_classes.R
 93dbe583ed92018ffc866411e4f3f187 *R/shiny_typo.R
 a543f0366bdb3e50cb6e6c3a667f05d0 *R/table_etiquettes.R
 8a9a1c275ce6dce27d71de056100f8a9 *R/zonage_a_facon.R
-2f50286bc43a99037835fccaca9df9af *build/partial.rdb
+13adfba9c63e91686d800327c0433b1c *build/partial.rdb
 c58849120ce41e82ca94453b5579d084 *build/vignette.rds
 8fcc4f29098ded5c18a56a53bde5af81 *data/com_dep_13_30_83_84.rda
 c3b4f239194baf4bb766c65c47b2aaa9 *data/depm.rda
@@ -128,9 +127,9 @@ e8367b17abd1cd938e9391eb0aab2a7a *data/donnees_a_facon.rda
 05932cce1ce17828bd0769e1ad23195d *data/donnees_monoloc.rda
 576e66e2260a5bdfb3ab4548d9ca8f22 *data/fram.rda
 5d714a9957479723b50e27844a373f46 *data/regm.rda
-537ebc3afb1189c019387160db15695a *inst/doc/oceanis.R
-14ac6b2a57644e7d3013129d061ed187 *inst/doc/oceanis.Rmd
-e9876bef4b246ddc7a65378a2b01decb *inst/doc/oceanis.html
+ed3601fc6ad86e2ee7e4b28532450704 *inst/doc/oceanis.R
+60a6b7d1745b99cd64be41336c1c703e *inst/doc/oceanis.Rmd
+114cfdafbaffd22729d0eac1cde6f528 *inst/doc/oceanis.html
 2a74059e4ba3176a0e94545f14473b5e *inst/extdata/dep_francemetro_2018.dbf
 ca3c5bd357eefc6a39dc971e663292dd *inst/extdata/dep_francemetro_2018.prj
 39a5a9fe8313394c3faa8423c0af2b54 *inst/extdata/dep_francemetro_2018.shp
@@ -208,4 +207,4 @@ ac9e4a1b19398b451df26d52d0bf3a9e *vignettes/images/export_qgis_mep.PNG
 a984196b56df507b6812f42ba6539ca2 *vignettes/images/shiny_ac_rp.PNG
 4ce9e0927d7c452230bdaa894123257f *vignettes/images/shiny_export_qgis.PNG
 fe2f2c4928008c7bb84980d51cf79971 *vignettes/images/shiny_fj.PNG
-14ac6b2a57644e7d3013129d061ed187 *vignettes/oceanis.Rmd
+60a6b7d1745b99cd64be41336c1c703e *vignettes/oceanis.Rmd

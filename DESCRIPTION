@@ -1,10 +1,8 @@
 Package: oceanis
 Type: Package
 Title: Cartography for Statistical Analysis
-Version: 0.8.4
-Date: 2019-05-17
-Author: Sébastien CALVET [cre, aut], Sophie AUDRIC [aut]
-Maintainer: Sébastien CALVET <sebastien.calvet@insee.fr>
+Version: 0.8.5
+Date: 2019-05-27
 Description: Creating maps for statistical analysis such as proportional circles, chroropleth, typology and flows. Some functions use 'shiny' or 'leaflet' technologies for dynamism and interactivity.
 	The great features are :
 	- Create maps in a web environment where the parameters are modifiable on the fly ('shiny' and 'leaflet' technology).
@@ -23,7 +21,14 @@ Imports: utils (>= 3.3.3),shinyjs (>= 1.0),shinythemes (>= 1.1.1),DT
 Suggests: knitr, rmarkdown
 VignetteBuilder: knitr
 Encoding: UTF-8
+Author: Sébastien CALVET - PSAR-AT - DR Provence-Alpes-Cote d'Azur - INSEE [cre, aut],
+	Sophie AUDRIC - PSAR-AT - DR Provence-Alpes-Cote d'Azur - INSEE [aut],
+	SED - DR Hauts-de-France - INSEE [ctb],
+	PSAR-SL - DR Auvergne-Rhone-Alpes - INSEE [ctb],
+	PSAR-EEP - DR Occitanie - INSEE [ctb],
+	SED - DR Pays-de-la-Loire - INSEE [ctb]
+Maintainer: Sébastien CALVET <sebastien.calvet@insee.fr>
 NeedsCompilation: no
-Packaged: 2019-05-17 07:43:22 UTC; zz0srj
+Packaged: 2019-05-27 09:56:14 UTC; zz0srj
 Repository: CRAN
-Date/Publication: 2019-05-17 15:30:03 UTC
+Date/Publication: 2019-05-27 11:30:03 UTC
