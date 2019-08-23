@@ -1,18 +1,19 @@
 add_legende_typo <-
-function(map,titre=NULL,lng=NULL,lat=NULL,labels=NULL,zoom=8)
+function(map,titre=NULL,lng=NULL,lat=NULL,labels=NULL,zoom=8,map_leaflet=NULL)
   {
     # Verification des parametres
     
-    msg_error1<-msg_error2<-msg_error3<-msg_error4 <- NULL
+    msg_error1<-msg_error2<-msg_error3<-msg_error4<-msg_error5 <- NULL
     
-    if(any(!any(class(map) %in% "leaflet"),!any(class(map) %in% "htmlwidget"))) msg_error1 <- "La carte doit etre un objet leaflet / "
+    if (any(!any(class(map) %in% "leaflet"), !any(class(map) %in% "htmlwidget"))) if(!any(class(map) %in% "leaflet_proxy")) msg_error1 <- "La carte doit etre un objet leaflet ou leaflet_proxy / "
     if(!is.null(lng)) if(any(class(lng)!="numeric")) msg_error2 <- "La longitude doit etre de type numerique (en coordonnees WGS84) / "
     if(!is.null(lat)) if(any(class(lat)!="numeric")) msg_error3 <- "La latitude doit etre de type numerique (en coordonnees WGS84) / "
     if(!is.null(labels)) if(any(class(labels)!="character")) msg_error4 <- "Les labels doivent etre un vecteur de type caractere / "
+    if (!is.null(map_leaflet)) if (any(!any(class(map_leaflet) %in% "leaflet"), !any(class(map_leaflet) %in% "htmlwidget"))) msg_error5 <- "La carte doit etre un objet leaflet / "
     
-    if(any(!is.null(msg_error1),!is.null(msg_error2),!is.null(msg_error3),!is.null(msg_error4)))
+    if(any(!is.null(msg_error1),!is.null(msg_error2),!is.null(msg_error3),!is.null(msg_error4),!is.null(msg_error5)))
     {
-      stop(simpleError(paste0(msg_error1,msg_error2,msg_error3,msg_error4)))
+      stop(simpleError(paste0(msg_error1,msg_error2,msg_error3,msg_error4,msg_error5)))
     }
     
     if(is.null(titre)) titre <- " "
@@ -22,32 +23,38 @@ function(map,titre=NULL,lng=NULL,lat=NULL,labels=NULL,zoom=8)
       labels<-iconv(labels,"latin1","utf8")
     }
     
+    if(!is.null(map_leaflet))
+    {
+      map_proxy <- map
+      map <- map_leaflet
+    }
+    
     idx_carte <- NULL
     idx_legende <- NULL
     for(i in 1:length(map$x$calls))
     {
       if(map$x$calls[[i]]$method %in% "addPolygons")
       {
-        if(map$x$calls[[i]]$args[[3]]$nom_couche=="carte_typo") idx_carte <- c(idx_carte,i)
+        if(map$x$calls[[i]]$args[[3]]=="carte_typo") idx_carte <- c(idx_carte,i)
       }
       if(map$x$calls[[i]]$method %in% "addRectangles")
       {
-        if(map$x$calls[[i]]$args[[6]]$nom_couche=="legende_typo") idx_legende <- c(idx_legende,i)
+        if(map$x$calls[[i]]$args[[6]]=="legende_typo") idx_legende <- c(idx_legende,i)
       }
       if(!is.null(idx_legende)) # la legende existe
       {
         if(map$x$calls[[i]]$method %in% "addPolygons")
         {
-          if(map$x$calls[[i]]$args[[3]]$nom_couche=="legende_typo") idx_legende <- c(idx_legende,i)
+          if(map$x$calls[[i]]$args[[3]]=="legende_typo") idx_legende <- c(idx_legende,i)
         }
         if(map$x$calls[[i]]$method %in% "addMarkers")
         {
-          if(map$x$calls[[i]]$args[[5]]$nom_couche=="legende_typo") idx_legende <- c(idx_legende,i)
+          if(map$x$calls[[i]]$args[[5]]=="legende_typo") idx_legende <- c(idx_legende,i)
         }
       }
     }
     
-    code_epsg <- map$x$calls[[idx_carte[length(idx_carte)]]]$args[[3]]$code_epsg
+    code_epsg <- map$x$calls[[idx_carte[length(idx_carte)]]]$args[[4]]$code_epsg
     
     coeff <- ((360/(2^zoom))/7.2) # Permet de fixer une distance sur l'ecran. Il s'agit en gros d'une conversion des degres en pixels. Reste constant a longitude egale mais varie un peu selon la latitude
     
@@ -98,6 +105,24 @@ function(map,titre=NULL,lng=NULL,lat=NULL,labels=NULL,zoom=8)
       # On ajoute un cadre blanc autour de la legende
       y_coord_rectangle <- min(get(paste0("rectangle_",nb_classes))[[1]][,2])
       
+      # leaflet rectangles et valeurs classes
+      label_rectangle <- NULL
+      txt <- map$x$calls[[idx_carte[length(idx_carte)]]]$args[[5]]
+      aa <- sapply(1:length(txt), function(x) label_rectangle <<- c(label_rectangle,substring(txt[x],str_locate_all(txt[x],">")[[1]][11]+1,nchar(txt[x])-15)))
+      label_rectangle <- unique(label_rectangle)
+      
+      if(is.null(labels))
+      {
+        labels <- label_rectangle
+      }
+      
+      if(!is.null(map_leaflet))
+      {
+        map_leaflet <- map
+        map <- map_proxy
+        clearGroup(map, group = "legende_typo")
+      }
+      
       # leaflet du cadre blanc en 1er
       map <- addRectangles(map = map,
                            lng1 = lng-coeff*0.5, lat1 = lat+coeff*0.5,
@@ -110,23 +135,12 @@ function(map,titre=NULL,lng=NULL,lat=NULL,labels=NULL,zoom=8)
                                           border-bottom:2px solid #2B3E50;
                                           border-radius: 5%"),
                            weight = 1,
-                           options = pathOptions(clickable = F),
+                           options = pathOptions(pane = "fond_legende", clickable = F),
                            fill = T,
                            fillColor = "white",
                            fillOpacity = 0.5,
-                           group=list(nom_couche="legende_typo")
+                           group="legende_typo"
                            )
-      
-      # leaflet rectangles et valeurs classes
-      label_rectangle <- NULL
-      txt <- map$x$calls[[idx_carte[length(idx_carte)]]]$args[[5]]
-      aa <- sapply(1:length(txt), function(x) label_rectangle <<- c(label_rectangle,substring(txt[x],str_locate_all(txt[x],">")[[1]][11]+1,nchar(txt[x])-15)))
-      label_rectangle <- unique(label_rectangle)
-      
-      if(is.null(labels))
-      {
-        labels <- label_rectangle
-      }
       
       for(i in 1:nb_classes)
       {
@@ -138,7 +152,7 @@ function(map,titre=NULL,lng=NULL,lat=NULL,labels=NULL,zoom=8)
                                                                  "color" = "black",
                                                                  "font-size" = "12px"
                                                                )),
-                                   group=list(nom_couche="legende_typo")
+                                   group="legende_typo"
         )
       }
       
@@ -147,11 +161,11 @@ function(map,titre=NULL,lng=NULL,lat=NULL,labels=NULL,zoom=8)
       {
         map <- addPolygons(map = map, data = st_polygon(get(paste0("rectangle_",i))),
                            stroke = FALSE,
-                           options = pathOptions(clickable = F),
+                           options = pathOptions(pane = "fond_legende", clickable = F),
                            fill = T,
                            fillColor = pal_classes[i],
                            fillOpacity = 1,
-                           group=list(nom_couche="legende_typo")
+                           group="legende_typo"
         )
       }
       
@@ -167,7 +181,7 @@ function(map,titre=NULL,lng=NULL,lat=NULL,labels=NULL,zoom=8)
                                                                "color" = "black",
                                                                "font-size" = "14px"
                                                              )),
-                                 group=list(nom_couche="legende_typo")
+                                 group="legende_typo"
       )
     }
     

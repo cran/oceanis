@@ -337,7 +337,7 @@ function(data,fondMaille,fondMailleElargi=NULL,fondContour,fondSuppl=NULL,idData
         
         output$type_legende_ac <- renderUI({
           radioButtons("type_legende_ac_id", label = h5("Type de l\u00e9gende"),
-                       choices = list("Litt\u00e9rale" = 1, "En echelle" = 2),
+                       choices = list("Litterale" = 1, "En echelle" = 2),
                        selected = 1, inline = TRUE)
         })
         
@@ -884,7 +884,7 @@ function(data,fondMaille,fondMailleElargi=NULL,fondContour,fondSuppl=NULL,idData
         if(length(unique(bornes)) != length(bornes))
         {
           removeModal()
-          showModal(modalDialog(HTML(paste0("<font size=+1>Les bornes calculees avec la methode '",input$methode_ac_id,"' ne sont pas uniques. La methode kmeans a donc ete retenue.</font>")), size="l", footer=NULL, easyClose = TRUE, style = "color: #fff; background-color: #DF691A; border-color: #2e6da4")) #337ab7
+          showModal(modalDialog(HTML(paste0("<font size=+1>Les bornes calcul\u00e9es avec la methode '",input$methode_ac_id,"' ne sont pas uniques. La methode kmeans a donc \u00e9t\u00e9 retenue.</font>")), size="l", footer=NULL, easyClose = TRUE, style = "color: #fff; background-color: #DF691A; border-color: #2e6da4")) #337ab7
           Sys.sleep(7)
           suppressWarnings(bornes_analyse <- classIntervals(as.numeric(analyse_ac()$donnees[,varRatio]),max_classes$a,style="kmeans",rtimes=10,intervalClosure="left"))
           carac_bornes <- calcul_bornes(analyse_ac()$donnees,bornes_analyse,varRatio,max_classes$a,"kmeans")
@@ -980,14 +980,12 @@ function(data,fondMaille,fondMailleElargi=NULL,fondContour,fondSuppl=NULL,idData
           m <- leaflet(padding = 0,
                        options = leafletOptions(
                          preferCanvas = TRUE,
-                         transition = 2,
-                         minZoom = 6,
-                         maxZoom = 10
+                         transition = 2
                        )) %>%
             
             setMapWidgetStyle(list(background = "#AFC9E0")) %>%
             
-            addTiles_insee(attribution = paste0("<a href=\"http://www.insee.fr\">\u00A9 IGN - INSEE ",format(Sys.time(), format = "%Y"),"</a>")) %>%
+            addTiles_insee(attribution = paste0("<a href=\"http://www.insee.fr\">OCEANIS - \u00A9 IGN - INSEE ",format(Sys.time(), format = "%Y"),"</a>")) %>%
             
             fitBounds(lng1 = min(list_bbox_ac()[[1]]),
                       lat1 = min(list_bbox_ac()[[2]]),

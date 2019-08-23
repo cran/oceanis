@@ -401,7 +401,7 @@ function(data,fondMaille,fondMailleElargi=NULL,fondContour,fondSuppl=NULL,idData
         
         output$type_legende_ac_rp <- renderUI({
           radioButtons("type_legende_ac_rp_id", label = h5("Type de l\u00e9gende"),
-                       choices = list("Litt\u00e9rale" = 1, "En echelle" = 2),
+                       choices = list("Litterale" = 1, "En echelle" = 2),
                        selected = 1, inline = TRUE)
         })
         
@@ -1193,14 +1193,12 @@ function(data,fondMaille,fondMailleElargi=NULL,fondContour,fondSuppl=NULL,idData
           m <- leaflet(padding = 0,
                        options = leafletOptions(
                          preferCanvas = TRUE,
-                         transition = 2,
-                         minZoom = 6,
-                         maxZoom = 10
+                         transition = 2
                        )) %>%
             
             setMapWidgetStyle(list(background = "#AFC9E0")) %>%
             
-            addTiles_insee(attribution = paste0("<a href=\"http://www.insee.fr\">\u00A9 IGN - INSEE ",format(Sys.time(), format = "%Y"),"</a>")) %>%
+            addTiles_insee(attribution = paste0("<a href=\"http://www.insee.fr\">OCEANIS - \u00A9 IGN - INSEE ",format(Sys.time(), format = "%Y"),"</a>")) %>%
             
             fitBounds(lng1 = min(list_bbox_ac_rp()[[1]]),
                       lat1 = min(list_bbox_ac_rp()[[2]]),

@@ -1,4 +1,5 @@
 \name{leaflet}
+\alias{leaflet_fonds_simples}
 \alias{leaflet_ronds}
 \alias{leaflet_classes}
 \alias{leaflet_ronds_classes}
@@ -14,38 +15,47 @@
 	Create interactive maps for statistical analysis by 'leaflet' (zoom + pop-up).
 }
 \usage{
+leaflet_fonds_simples(listFonds, popup = NULL, init = TRUE, map = NULL)
+
 leaflet_ronds(data, fondMaille, fondMailleElargi = NULL, fondSuppl = NULL, idData,
-varVolume, rayonRond = NULL, rapportRond = NULL, dom = "0", fondChx = NULL)
+varVolume, rayonRond = NULL, rapportRond = NULL, dom = "0", fondChx = NULL,
+colPos = "#CD853F", colNeg = "#6495ED", colBorder = "white", opacityElargi = 0.6,
+map_proxy = NULL)
 
 leaflet_classes(data, fondMaille, fondMailleElargi = NULL, fondSuppl = NULL, idData,
-varRatio, methode = "kmeans", nbClasses = 3, bornes = NULL,
-precision = 1, dom = "0")
+varRatio, methode = "kmeans", nbClasses = 3, bornes = NULL, stylePalette = "defaut",
+opacityElargi = 0.6, colBorder = "white", precision = 1, dom = "0", map_proxy = NULL)
 
 leaflet_ronds_classes(data, fondMaille, fondMailleElargi = NULL, fondSuppl = NULL,
 idData, varVolume, varRatio, rayonRond = NULL,
 rapportRond = NULL, methode = "kmeans", nbClasses = 3,
-bornes = NULL, precision = 1,  dom = "0", fondChx = NULL)
+bornes = NULL, stylePalette = "defaut", opacityElargi = 0.6, colBorder = "white",
+precision = 1, dom = "0", fondChx = NULL, map_proxy = NULL)
 
 leaflet_classes_ronds(data, fondMaille, fondMailleElargi = NULL, fondSuppl = NULL,
 idData, varVolume, varRatio, rayonRond = NULL,
 rapportRond = NULL, methode = "kmeans", nbClasses = 3,
-bornes = NULL, precision = 1, dom = "0", fondChx = NULL)
+bornes = NULL, stylePalette = "defaut", opacityElargi = 0.6,
+colBorderClasses = "white", colBorderRonds = "#303030", precision = 1, dom = "0",
+fondChx = NULL, map_proxy = NULL)
 
-leaflet_typo(data, fondMaille, fondSuppl = NULL, idData, varTypo, dom = "0")
+leaflet_typo(data, fondMaille, fondSuppl = NULL, idData, varTypo, dom = "0",
+map_proxy = NULL)
 
 leaflet_oursins(data, fondMaille, fondSuppl = NULL, idDataDepart, idDataArrivee,
 varFlux, filtreVol = 0, filtreDist = 100, filtreMajeurs = 10,
-decalageAllerRetour = 0, decalageCentroid = 0,
-dom = "0")
+decalageAllerRetour = 0, decalageCentroid = 0, dom = "0", map_proxy = NULL)
 
 leaflet_joignantes(data, fondMaille, typeMaille, fondSuppl = NULL, idDataDepart,
 idDataArrivee, varFlux, largeurFlecheMax = NULL, filtreVol = 0,
 filtreDist = 100, filtreMajeurs = 10, decalageAllerRetour = 0,
-decalageCentroid = 0, dom = "0")
+decalageCentroid = 0, colFleche = "#CD853F", colBorder = "#303030", dom = "0",
+map_proxy = NULL)
 
 leaflet_saphirs(data, fondMaille, typeMaille, fondSuppl = NULL, idDataDepart,
 idDataArrivee, varFlux, largeurFlecheMax = NULL, direction = "Ent",
-filtreVol = 0, dom = "0")
+filtreVol = 0, colEntree = "#CD853F", colSortie = "#6495ED",
+colBorder = "#303030", dom = "0", map_proxy = NULL)
 }
 \arguments{
   \item{data}{
@@ -53,6 +63,18 @@ filtreVol = 0, dom = "0")
 }
   \item{fondMaille}{
 	objet sf. Fond de carte.
+}
+  \item{listFonds}{
+	list d'objets sf. Liste de fonds de carte.
+}
+  \item{popup}{
+	vecteur de numeriques (numeric). Choix des couches avec les popup actifs. Par defaut a NULL (toutes les couches ont les popup actifs).
+}
+  \item{init}{
+	booleen. TRUE pour creer une carte avec des fonds d'habillage. FALSE pour des fonds d'analyses. Par defaut a TRUE.
+}
+  \item{map}{
+	objet leaflet. Permet d'ajouter des couches a une carte existante. Par defaut a NULL.
 }
   \item{typeMaille}{
 	chaine de caracteres (character). Type de maille issus d'un zonage administratifs ou d'etudes ("REG", "DEP", "UU", "AU", "ZE", "BV", "EPCI" ou "COM").
@@ -123,11 +145,44 @@ filtreVol = 0, dom = "0")
   \item{decalageCentroid}{
 	valeur numerique (numeric). Decalage des fleches depuis et vers les centroides des territoires (km).
 }
+  \item{colPos}{
+	chaine de caracteres (character). Couleur nommee (par exemple "orange") ou hexadecimal (par exemple "#FFA500"). Par defaut "#CD853F".
+}
+  \item{colNeg}{
+	chaine de caracteres (character). Couleur nommee (par exemple "blue") ou hexadecimal (par exemple "#0000FF"). Par defaut "#6495ED".
+}
+  \item{colBorder}{
+	chaine de caracteres (character). Couleur nommee (par exemple "white") ou hexadecimal (par exemple "#FFFFFF"). Par defaut "white" (ou "#303030" pour les fleches).
+}
+  \item{colBorderRonds}{
+	chaine de caracteres (character). Couleur nommee (par exemple "grey") ou hexadecimal (par exemple "#808080"). Par defaut "#303030".
+}
+  \item{colBorderClasses}{
+	chaine de caracteres (character). Couleur nommee (par exemple "grey") ou hexadecimal (par exemple "#808080"). Par defaut "white".
+}
+  \item{stylePalette}{
+	chaine de caracteres (character). Palette de la charte INSEE. A choisir entre "InseeFlash", "InseeAnalyse", "InseeDossier", "InseePremiere" ou "defaut" (par defaut).
+}
+  \item{colFleche}{
+	chaine de caracteres (character). Couleur nommee (par exemple "orange") ou hexadecimal (par exemple "#FFA500"). Par defaut "#CD853F".
+}
+  \item{colEntree}{
+	chaine de caracteres (character). Couleur nommee (par exemple "orange") ou hexadecimal (par exemple "#FFA500"). Par defaut "#CD853F".
+}
+  \item{colSortie}{
+	chaine de caracteres (character). Couleur nommee (par exemple "blue") ou hexadecimal (par exemple "#0000FF"). Par defaut "#6495ED".
+}
+  \item{opacityElargi}{
+	valeur numerique (numeric). Opacite de la representation elargie. Par defaut a 0.6 (valeur comprise entre 0-transparent et 1-opaque).
+}
   \item{dom}{
 	chaine de caracteres (character). "0" (par defaut pour la France metropolitaine), "971" (Guadeloupe), "972" (Martinique), "973" (Guyane), "974" (La Reunion) ou "976" (Mayotte). Ce parametre permet de definir le systeme de projection de la carte.
 }
   \item{fondChx}{
 	objet sf. Fond des chefs-lieux. Pour les ronds proportionnels avec une maille communale, choix entre la position du centre des ronds sur les centroides des communes (NULL par defaut) ou sur les chefs-lieux (chx) des communes.
+}
+  \item{map_proxy}{
+	objet leaflet ou leaflet_proxy. Pour l'integration des fonctions leaflet dans les applications shiny (cf vignette). Par defaut a NULL.
 }
 }
 \details{
@@ -141,10 +196,16 @@ filtreVol = 0, dom = "0")
 	
 	- d'ajouter une legende, des elements contextuels et de modifier son apparence via les fonctions oceanis associees.
 	
-	Les fonctions leaflet_() retournent un objet de type leaflet. Si vous executez une fonction leaflet_() sans recuperer le resultat dans une variable, la carte s'affichera automatiquement dans la fenetre viewer mais ne pourra pas etre reutilisee pour etre modifiee.
+	Les fonctions leaflet_() retournent un objet de type leaflet. Si vous executez une fonction leaflet_() sans recuperer le resultat dans une variable, la carte s'affichera automatiquement dans la fenetre viewer de RStudio mais ne pourra pas etre reutilisee pour etre modifiee.
 	Si vous sauvegardez le resultat dans une variable, la carte ne s'affichera qu'a l'execution de cette variable (voir exemples).
+
+	Les fonctions leaflet peuvent etre integrees dans les applications shiny. Le parametre map_proxy permet d'actualiser uniquement les couches modifiees et non toute la carte entiere (voir vignette).
 	
   \describe{
+  	\item{Fonds simples}{
+		Il s'agit d'une carte sans analyse avec uniquement des fonds. Le premier fond de la liste est positionne derriere la carte et le dernier fond de la liste devant. La personnalisation des fonds se fait avec la fonction \code{set_fonds_simples}.
+	}
+	
 	\item{Ronds proportionnels}{
 		L'interieur des cercles est de couleur orange (couleur par defaut) pour representer les valeurs positives de la variable en volume et bleu pour les valeurs negatives.
 		
@@ -210,13 +271,15 @@ filtreVol = 0, dom = "0")
 	
 	\code{\link{distrib_variable},}
 	
-	\code{\link{add_legende_ronds}, \link{add_legende_classes}, \link{add_legende_typo},}
+	\code{\link{add_legende_ronds}, \link{add_legende_classes}, \link{add_legende_typo}, \link{add_legende_typo_symboles},}
 	
 	\code{\link{add_legende_joignantes}, \link{add_legende_saphirs},}
 	
 	\code{\link{coord_legende},}
 	
 	\code{\link{add_source}, \link{add_titre}, \link{add_fond_osm},}
+	
+	\code{\link{set_fonds_simples},}
 	
 	\code{\link{export_qgis_ronds}, \link{export_qgis_classes}, \link{export_qgis_ronds_classes}, \link{export_qgis_classes_ronds},}
 	
