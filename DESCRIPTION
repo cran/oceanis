@@ -1,7 +1,7 @@
 Package: oceanis
 Type: Package
 Title: Cartography for Statistical Analysis
-Version: 1.0.0
+Version: 1.0.1
 Date: 2019-08-23
 Description: Creating maps for statistical analysis such as proportional circles, chroropleth, typology and flows. Some functions use 'shiny' or 'leaflet' technologies for dynamism and interactivity.
 	The great features are :
@@ -31,6 +31,6 @@ Author: Sébastien CALVET - PSAR-AT - DR Provence-Alpes-Cote d'Azur - INSEE [cre
 	SED - DR Pays-de-la-Loire - INSEE [ctb]
 Maintainer: Sébastien CALVET <sebastien.calvet@insee.fr>
 NeedsCompilation: no
-Packaged: 2019-08-23 12:29:31 UTC; zz0srj
+Packaged: 2019-08-28 14:29:42 UTC; zz0srj
 Repository: CRAN
-Date/Publication: 2019-08-23 13:40:03 UTC
+Date/Publication: 2019-08-28 23:50:02 UTC

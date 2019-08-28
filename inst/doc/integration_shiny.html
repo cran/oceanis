@@ -201,18 +201,18 @@ hr {
 </head>
 
 <body>
-<p>Les fonctions leaflet_ peuvent Ãªtre utilisÃ©es dans 2 contextes diffÃ©rents :</p>
+<p>Les fonctions leaflet_ peuvent etre utilisees dans 2 contextes differents :</p>
 
 <ul>
-<li><p>Appel direct d&#39;une fonction leaflet_ dans l&#39;environnement RStudio. Dans ce cas, la carte s&#39;affiche dans la fenÃªtre Viewer (ctrl+9). Il s&#39;agit lÃ  d&#39;un contexte &#39;leaflet&#39; classique.</p></li>
-<li><p>Dans une application shiny, les fonctions leaflet_ peuvent Ãªtre utilisÃ©es pour actualiser des cartes Ã  chaque changement de paramÃ¨tres grÃ¢ce Ã  leaflet_proxy.
-L&#39;intÃ©rÃªt ici est de ne pas recharger toutes les couches de la carte mais uniquement celles qui doivent Ãªtre actualisÃ©es. Le temps de rafraÃ®chissement est alors rÃ©duit.
+<li><p>Appel direct d&#39;une fonction leaflet_ dans l&#39;environnement RStudio. Dans ce cas, la carte s&#39;affiche dans la fenetre Viewer (ctrl+9). Il s&#39;agit la d&#39;un contexte &#39;leaflet&#39; classique.</p></li>
+<li><p>Dans une application shiny, les fonctions leaflet_ peuvent etre utilisees pour actualiser des cartes a chaque changement de parametres grace a leaflet_proxy.
+L&#39;interet ici est de ne pas recharger toutes les couches de la carte mais uniquement celles qui doivent etre actualisees. Le temps de rafraichissement est alors reduit.
 C&#39;est le contexte &#39;proxy&#39;.</p></li>
 </ul>
 
-<p>Il est bien sÃ»r possible d&#39;appeler des fonctions leaflet_ dans une application shiny avec un contexte &#39;leaflet&#39;, mais dans ce cas toute la carte sera rechargÃ©e dÃ¨s qu&#39;un paramÃ¨tre sera modifiÃ©.</p>
+<p>Il est bien sur possible d&#39;appeler des fonctions leaflet_ dans une application shiny avec un contexte &#39;leaflet&#39;, mais dans ce cas toute la carte sera rechargee des qu&#39;un parametre sera modifie.</p>
 
-<p>Ci-dessous, quelques exemples d&#39;applications shiny intÃ©grant les fonctions leaflet_ dans un contexte &#39;proxy&#39;.</p>
+<p>Ci-dessous, quelques exemples d&#39;applications shiny integrant les fonctions leaflet_ dans un contexte &#39;proxy&#39;.</p>
 
 <h2>Ronds proportionnels</h2>
 
@@ -232,7 +232,8 @@ C&#39;est le contexte &#39;proxy&#39;.</p></li>
             uiOutput(&quot;colBorderRonds_out&quot;)
           ),
           mainPanel(
-            leafletOutput(&quot;carte&quot;, height = 900)
+            leafletOutput(&quot;carte&quot;,
+                          height = 900)
           )
         )
     ),
@@ -241,23 +242,38 @@ C&#39;est le contexte &#39;proxy&#39;.</p></li>
 
       # Declaration et envoi des widgets a l&#39;ui
       output$lngRonds_out &lt;- renderUI({
-        numericInput(&quot;lngRonds&quot;, &quot;Longitude de la legende des ronds&quot;, value = 9)
+        numericInput(&quot;lngRonds&quot;,
+                     &quot;Longitude de la legende des ronds&quot;,
+                     value = 9)
       })
       output$latRonds_out &lt;- renderUI({
-        numericInput(&quot;latRonds&quot;, &quot;Latitude de la legende des ronds&quot;, value = 49)
+        numericInput(&quot;latRonds&quot;, 
+                     &quot;Latitude de la legende des ronds&quot;,
+                     value = 49)
       })
       output$rayon_rond_out &lt;- renderUI({
-        numericInput(&quot;rayon_rond&quot;, &quot;Rayon du rond le plus grand&quot;, value = 30000)
+        numericInput(&quot;rayon_rond&quot;,
+                     &quot;Rayon du rond le plus grand&quot;,
+                     value = 30000)
       })
       output$opaciteElargie_out &lt;- renderUI({
-        sliderInput(&quot;opaciteElargie&quot;, &quot;Opacite de la representation elargie&quot;,
-                    min=0,max=100,value=60,step=10,ticks=FALSE)
+        sliderInput(&quot;opaciteElargie&quot;,
+                    &quot;Opacite de la representation elargie&quot;,
+                    min=0,
+                    max=100,
+                    value=60,
+                    step=10,
+                    ticks=FALSE)
       })
       output$colPos_out &lt;- renderUI({
-        textInput(&quot;colPos&quot;, &quot;Couleur de remplissage des ronds&quot;, value = c(&quot;#CD853F&quot;))
+        textInput(&quot;colPos&quot;,
+                  &quot;Couleur de remplissage des ronds&quot;,
+                  value = &quot;#CD853F&quot;)
       })
       output$colBorderRonds_out &lt;- renderUI({
-        textInput(&quot;colBorderRonds&quot;, &quot;Couleur de la bordure des ronds&quot;, value = c(&quot;#303030&quot;))
+        textInput(&quot;colBorderRonds&quot;,
+                  &quot;Couleur de la bordure des ronds&quot;,
+                  value = &quot;#303030&quot;)
       })
 
       # Initialisation et envoi de la carte leaflet a l&#39;ui
@@ -389,7 +405,8 @@ C&#39;est le contexte &#39;proxy&#39;.</p></li>
             uiOutput(&quot;colBorder_out&quot;)
           ),
           mainPanel(
-            leafletOutput(&quot;carte&quot;, height = 900)
+            leafletOutput(&quot;carte&quot;,
+                          height = 900)
           )
         )
     ),
@@ -398,17 +415,28 @@ C&#39;est le contexte &#39;proxy&#39;.</p></li>
 
       # Declaration et envoi des widgets a l&#39;ui
       output$lngClasses_out &lt;- renderUI({
-        numericInput(&quot;lngClasses&quot;, &quot;Longitude de la legende des classes&quot;, value = 9)
+        numericInput(&quot;lngClasses&quot;,
+                     &quot;Longitude de la legende des classes&quot;,
+                     value = 9)
       })
       output$latClasses_out &lt;- renderUI({
-        numericInput(&quot;latClasses&quot;, &quot;Latitude de la legende des classes&quot;, value = 49)
+        numericInput(&quot;latClasses&quot;,
+                     &quot;Latitude de la legende des classes&quot;,
+                     value = 49)
       })
       output$nb_classes_out &lt;- renderUI({
-        numericInput(&quot;nb_classes&quot;, &quot;Nombre de classes&quot;, value = 4)
+        numericInput(&quot;nb_classes&quot;,
+                     &quot;Nombre de classes&quot;,
+                     value = 4)
       })
       output$opaciteElargie_out &lt;- renderUI({
-        sliderInput(&quot;opaciteElargie&quot;, &quot;Opacite de la representation elargie&quot;,
-                    min=0,max=100,value=60,step=10,ticks=FALSE)
+        sliderInput(&quot;opaciteElargie&quot;,
+                    &quot;Opacite de la representation elargie&quot;,
+                    min=0,
+                    max=100,
+                    value=60,
+                    step=10,
+                    ticks=FALSE)
       })
       output$stylePalette_out &lt;- renderUI({
         selectInput(&quot;stylePalette&quot;, &quot;Style Insee de la palette&quot;,
@@ -417,7 +445,9 @@ C&#39;est le contexte &#39;proxy&#39;.</p></li>
                     selected = &quot;defaut&quot;)
       })
       output$colBorder_out &lt;- renderUI({
-        textInput(&quot;colBorderClasses&quot;, &quot;Couleur de la bordure des classes&quot;, value = c(&quot;white&quot;))
+        textInput(&quot;colBorderClasses&quot;,
+                  &quot;Couleur de la bordure des classes&quot;,
+                  value = &quot;white&quot;)
       })
 
       # Initialisation et envoi de la carte leaflet a l&#39;ui
@@ -528,7 +558,7 @@ C&#39;est le contexte &#39;proxy&#39;.</p></li>
   )
 </code></pre>
 
-<h2>FlÃ¨ches joignantes</h2>
+<h2>Fleches joignantes</h2>
 
 <pre><code class="r">  library(oceanis)
   library(shiny)
@@ -545,7 +575,8 @@ C&#39;est le contexte &#39;proxy&#39;.</p></li>
             uiOutput(&quot;colBorderFleches_out&quot;)
           ),
           mainPanel(
-            leafletOutput(&quot;carte&quot;, height = 900)
+            leafletOutput(&quot;carte&quot;,
+                          height = 900)
           )
         )
     ),
@@ -554,19 +585,29 @@ C&#39;est le contexte &#39;proxy&#39;.</p></li>
 
       # Declaration et envoi des widgets a l&#39;ui
       output$lngFleches_out &lt;- renderUI({
-        numericInput(&quot;lngFleches&quot;, &quot;Longitude de la legende des fleches&quot;, value = 9)
+        numericInput(&quot;lngFleches&quot;,
+                     &quot;Longitude de la legende des fleches&quot;,
+                     value = 9)
       })
       output$latFleches_out &lt;- renderUI({
-        numericInput(&quot;latFleches&quot;, &quot;Latitude de la legende des fleches&quot;, value = 49)
+        numericInput(&quot;latFleches&quot;,
+                     &quot;Latitude de la legende des fleches&quot;,
+                     value = 49)
       })
       output$largeurFleche_out &lt;- renderUI({
-        numericInput(&quot;largeurFleche&quot;, &quot;Largeur de la plus grande fleche&quot;, value = 50)
+        numericInput(&quot;largeurFleche&quot;,
+                     &quot;Largeur de la plus grande fleche&quot;,
+                     value = 50)
       })
       output$colFleches_out &lt;- renderUI({
-        textInput(&quot;colFleches&quot;, &quot;Couleur de remplissage des fleches&quot;, value = c(&quot;#CD853F&quot;))
+        textInput(&quot;colFleches&quot;,
+                  &quot;Couleur de remplissage des fleches&quot;,
+                  value = &quot;#CD853F&quot;)
       })
       output$colBorderFleches_out &lt;- renderUI({
-        textInput(&quot;colBorderFleches&quot;, &quot;Couleur de la bordure des fleches&quot;, value = c(&quot;#303030&quot;))
+        textInput(&quot;colBorderFleches&quot;,
+                  &quot;Couleur de la bordure des fleches&quot;,
+                  value = &quot;#303030&quot;)
       })
 
       # Initialisation et envoi de la carte leaflet a l&#39;ui

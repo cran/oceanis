@@ -1,6 +1,6 @@
-020656bfcc2cc463b0e02936d3209927 *DESCRIPTION
+db4fe785b7364d68f59e48905c220b4a *DESCRIPTION
 ffa10f40b98be2c2bc9608f56827ed23 *LICENSE
-942a11192297cc26a2b892d02c9eb3fa *NAMESPACE
+d6fa273d35e4d32ad9bc58d4e3152e51 *NAMESPACE
 683a59ac6d756e8a25f5db87dccee222 *NEWS
 84d5d4a7f322df9acb83925eec4a7b08 *R/addTiles_insee.R
 c9e9f61d76b85fb94c1065a70ded9f4a *R/add_fond_osm.R
@@ -133,8 +133,8 @@ c1dc46a083a55ccefd2648141d4e0d06 *R/shiny_ronds.R
 6556e4ada2b84fe85634bda8669b5648 *R/shiny_typo.R
 a543f0366bdb3e50cb6e6c3a667f05d0 *R/table_etiquettes.R
 09ca1a004c460971d9b08da8bb1d7ff3 *R/zonage_a_facon.R
-87b72e922d7f6bd5289c54e025311e72 *build/partial.rdb
-44cb31b01c24a2e80506aacc151fcf66 *build/vignette.rds
+c4e8feda12050aac9a930df3cf1bf91d *build/partial.rdb
+4673b71e36c405a92dc0c719cebfb6bd *build/vignette.rds
 6fb01d80694a8ced46c19a973559d0f9 *data/com_dep_13_30_83_84.rda
 2cd34c53582c9617c0bfa642718e3079 *data/depm.rda
 48efbf15dfa587d0d21ee492404532c2 *data/donnees_a_facon.rda
@@ -144,11 +144,11 @@ a543f0366bdb3e50cb6e6c3a667f05d0 *R/table_etiquettes.R
 b701ba43432c52288ef4d45ff7dd1c1a *data/fram.rda
 71bc4fc3a5ecdc35aa84680761247b16 *data/regm.rda
 2218a9ad564f56ee36ac93b0530fe1d3 *inst/doc/integration_shiny.R
-d1fd628b4e005715000770db987f4c7e *inst/doc/integration_shiny.Rmd
-1907721333fd7c97c5c4ded09b3d862f *inst/doc/integration_shiny.html
-92610e6cd0060f30d0aa115e289a76b9 *inst/doc/oceanis.R
-472813bcf1fc492483eec22deb74ce5f *inst/doc/oceanis.Rmd
-b01cd56316ef713c2fb1ed8b46eb7c2c *inst/doc/oceanis.html
+e23f2b1a8a2ec723f64407ff16755eeb *inst/doc/integration_shiny.Rmd
+0ba8945b02b69b5ee2304cd8758dd232 *inst/doc/integration_shiny.html
+73f6d84ceec814e7087dc5156dca88bf *inst/doc/oceanis.R
+de7f12d5f7dd6933be1bc76f2df5cc4f *inst/doc/oceanis.Rmd
+ecfffed910e2aee614eb502e7592648a *inst/doc/oceanis.html
 2a74059e4ba3176a0e94545f14473b5e *inst/extdata/dep_francemetro_2018.dbf
 ca3c5bd357eefc6a39dc971e663292dd *inst/extdata/dep_francemetro_2018.prj
 39a5a9fe8313394c3faa8423c0af2b54 *inst/extdata/dep_francemetro_2018.shp
@@ -235,5 +235,5 @@ dc9869774a51c4915357acaf80a861a6 *vignettes/images/readme_leaflet_rp_ac.PNG
 a984196b56df507b6812f42ba6539ca2 *vignettes/images/shiny_ac_rp.PNG
 4ce9e0927d7c452230bdaa894123257f *vignettes/images/shiny_export_qgis.PNG
 fe2f2c4928008c7bb84980d51cf79971 *vignettes/images/shiny_fj.PNG
-d1fd628b4e005715000770db987f4c7e *vignettes/integration_shiny.Rmd
-472813bcf1fc492483eec22deb74ce5f *vignettes/oceanis.Rmd
+e23f2b1a8a2ec723f64407ff16755eeb *vignettes/integration_shiny.Rmd
+de7f12d5f7dd6933be1bc76f2df5cc4f *vignettes/oceanis.Rmd
