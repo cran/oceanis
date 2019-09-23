@@ -1,5 +1,5 @@
 leaflet_typo <-
-function(data,fondMaille,fondSuppl=NULL,idData,varTypo,dom="0",map_proxy=NULL)
+function(data,fondMaille,fondSuppl=NULL,idData,varTypo,dom="0",zoomMaille=NULL,map_proxy=NULL)
   {
     options("stringsAsFactors"=FALSE)
     
@@ -81,7 +81,20 @@ function(data,fondMaille,fondSuppl=NULL,idData,varTypo,dom="0",map_proxy=NULL)
     
     maille_WGS84 <- st_transform(fondMaille,"+init=epsg:4326 +proj=longlat +ellps=WGS84")
     
-    list_bbox <- list(c(st_bbox(maille_WGS84)[1],st_bbox(maille_WGS84)[3]),c(st_bbox(maille_WGS84)[2],st_bbox(maille_WGS84)[4]))
+    if(!is.null(zoomMaille))
+    {
+      zoom_maille_WGS84 <- maille_WGS84[maille_WGS84$CODE %in% zoomMaille,]
+      if(nrow(zoom_maille_WGS84)>0)
+      {
+        list_bbox <- list(c(st_bbox(zoom_maille_WGS84)[1],st_bbox(zoom_maille_WGS84)[3]),c(st_bbox(zoom_maille_WGS84)[2],st_bbox(zoom_maille_WGS84)[4]))
+      }else
+      {
+        list_bbox <- list(c(st_bbox(maille_WGS84)[1],st_bbox(maille_WGS84)[3]),c(st_bbox(maille_WGS84)[2],st_bbox(maille_WGS84)[4]))
+      }
+    }else
+    {
+      list_bbox <- list(c(st_bbox(maille_WGS84)[1],st_bbox(maille_WGS84)[3]),c(st_bbox(maille_WGS84)[2],st_bbox(maille_WGS84)[4]))
+    }
     
     if(!is.null(fondSuppl))
     {
@@ -137,7 +150,7 @@ function(data,fondMaille,fondSuppl=NULL,idData,varTypo,dom="0",map_proxy=NULL)
                            options = pathOptions(pane = "fond_pays", clickable = F),
                            fill = T, fillColor = "#CCCCCC", fillOpacity = 1,
                            group = "carte_typo_init",
-                           layerId = list(code_epsg=code_epsg,nom_fond="fond_pays")
+                           layerId = list(fond_pays=fond_pays,code_epsg=code_epsg,nom_fond="fond_pays")
                            
         )
       }
@@ -149,7 +162,7 @@ function(data,fondMaille,fondSuppl=NULL,idData,varTypo,dom="0",map_proxy=NULL)
                          options = pathOptions(pane = "fond_france", clickable = F),
                          fill = T, fillColor = "white", fillOpacity = 1,
                          group = "carte_typo_init",
-                         layerId = list(code_epsg=code_epsg,nom_fond="fond_france")
+                         layerId = list(fond_france=fond_france,code_epsg=code_epsg,nom_fond="fond_france")
       )
       
       # AFFICHAGE DU FOND TERRITOIRE
@@ -163,7 +176,7 @@ function(data,fondMaille,fondSuppl=NULL,idData,varTypo,dom="0",map_proxy=NULL)
                            popup = paste0("<b> <font color=#2B3E50>",as.data.frame(fond_territoire)[,"LIBELLE"], "</font> </b>"),
                            fill = T, fillColor = "white", fillOpacity = 0.001,
                            group = "carte_typo_init",
-                           layerId = list(code_epsg=code_epsg,nom_fond="fond_territoire")
+                           layerId = list(fond_territoire=fond_territoire,code_epsg=code_epsg,nom_fond="fond_territoire")
         )
       }
     }else # Contexte shiny/proxy

@@ -307,8 +307,8 @@ plot(sf::st_geometry(depm))
 donnees_a_facon &lt;- rio::import(file = system.file(&quot;data/donnees_a_facon.rda&quot;,
                                                   package = &quot;oceanis&quot;))
 # fond communal des departements 13, 30, 83 et 84
-com_dep_13_30_83_84 &lt;- rio::import(file = system.file(&quot;data/com_dep_13_30_83_84.rda&quot;,
-                                                      package = &quot;oceanis&quot;))
+com_dep_13_30_83_84 &lt;- sf::st_as_sf(rio::import(file = system.file(&quot;data/com_dep_13_30_83_84.rda&quot;,
+                                                      package = &quot;oceanis&quot;)))
 
 # chemin du fond de carte .shp
 path_to_shp &lt;- system.file(&quot;extdata&quot;,
