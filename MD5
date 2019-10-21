@@ -1,6 +1,6 @@
-c9ce8b2d25e6419938958f13a15eda14 *DESCRIPTION
+01317e9c7fb9aa70f1424aa2515c59f3 *DESCRIPTION
 ffa10f40b98be2c2bc9608f56827ed23 *LICENSE
-d6fa273d35e4d32ad9bc58d4e3152e51 *NAMESPACE
+7073769b4188234996b77f91103d1a0e *NAMESPACE
 2cfd2b8c583a64f203c40440def56902 *NEWS
 84d5d4a7f322df9acb83925eec4a7b08 *R/addTiles_insee.R
 16791d4dd5ef1af00369b6d182b3a820 *R/add_fond_osm.R
@@ -58,7 +58,7 @@ b2a9acb4edeff2ee6443b2540f582fae *R/extract_fond_leaflet_ronds.R
 dc3d02c4192c91943ccc0a3a3b223b00 *R/flux_legende_saphirs.R
 c96c2058b6bb1a735be95314a50d36b0 *R/flux_legende_saphirs_pl.R
 9477d7d68e217d6bf4b1848dc0038a60 *R/k_classes.R
-93a7e14676fe2a2bb4135a3ba016e5b1 *R/k_joignantes.R
+ac734a734d4fdc27f15e7f88b085bf70 *R/k_joignantes.R
 05403b04402d5159caaaf2d00d45d6fe *R/k_oursins.R
 0c329775004a9f3c538647ed66b3f128 *R/k_ronds.R
 0fdd8c84cfc1371686f78a613e91e21b *R/k_saphir.R
@@ -95,11 +95,11 @@ f1efb1322f3ad087d1931f598dfbff9b *R/modif_canevas_MEP.R
 6bffae23dfe3e9fed70f30daa815d7ec *R/nb_opposes.R
 c828afdba03dc0110a5033a0712905c7 *R/plot_classes.R
 8770c2dbefbaef8d2a8be2ae9c277791 *R/plot_classes_ronds.R
-25a6358672ad6d3f1c6925af91826721 *R/plot_joignantes.R
+f939d26263ee9f8971e5da4fb4cf4291 *R/plot_joignantes.R
 277b361ac29f08b7e416c65d9f249c0d *R/plot_oursins.R
 06bad89eff91a9e249c171d1f64fbef8 *R/plot_ronds.R
 9f6d9c2858fa10613d9a4204f6a2eecd *R/plot_ronds_classes.R
-89ee1d150ae230f3c0fe25165620fc8c *R/plot_saphirs.R
+fbb31b1d7a6e72df2dcdc60344f7d19f *R/plot_saphirs.R
 b3441184acc81331dba370417a50eb18 *R/plot_typo.R
 7663e4077ebdbcccf293607e03a2f16b *R/plot_typo_symboles.R
 0e4b9aca46417365067f4862735fa284 *R/rapport_ronds.R
@@ -133,7 +133,7 @@ c1dc46a083a55ccefd2648141d4e0d06 *R/shiny_ronds.R
 6556e4ada2b84fe85634bda8669b5648 *R/shiny_typo.R
 a543f0366bdb3e50cb6e6c3a667f05d0 *R/table_etiquettes.R
 09ca1a004c460971d9b08da8bb1d7ff3 *R/zonage_a_facon.R
-4cc580ed7352c801c15015e5e777463a *build/partial.rdb
+302217a63990a621416b5592d2ece3fc *build/partial.rdb
 4673b71e36c405a92dc0c719cebfb6bd *build/vignette.rds
 6fb01d80694a8ced46c19a973559d0f9 *data/com_dep_13_30_83_84.rda
 2cd34c53582c9617c0bfa642718e3079 *data/depm.rda
@@ -221,7 +221,6 @@ d21ec33dbf4add962ef63edcf81daa40 *man/set_fonds_simples.Rd
 d5bea38c80adc8b656a42b60c68677bf *man/set_style_oursins.Rd
 f65c175a80f28f42b6b3d96de828b595 *man/shiny.Rd
 90f3055adaf7ebdbf51ee85837d2c891 *man/zonage_a_facon.Rd
-92034c25e78d6f442f10f3578ad2e0f1 *vignettes/doc/diaporama-oceanis.odp
 69208afa175e9af5c41dfb7a96a7923a *vignettes/images/export_qgis_canevas.PNG
 ac9e4a1b19398b451df26d52d0bf3a9e *vignettes/images/export_qgis_mep.PNG
 8ace656fd8d768501f67404891e8ec00 *vignettes/images/plot_export_image.PNG
