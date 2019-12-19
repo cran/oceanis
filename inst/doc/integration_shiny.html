@@ -300,7 +300,7 @@ C&#39;est le contexte &#39;proxy&#39;.</p></li>
                             rayonRond = as.numeric(input$rayon_rond),
                             opacityElargi = as.numeric(input$opaciteElargie)/100,
                             colPos = input$colPos,
-                            colBorder = input$colBorderRonds,
+                            colBorderPos = input$colBorderRonds,
                             map_proxy = &quot;shiny&quot;)
       })
 
@@ -336,7 +336,7 @@ C&#39;est le contexte &#39;proxy&#39;.</p></li>
                               rayonRond = as.numeric(input$rayon_rond),
                               opacityElargi = as.numeric(isolate(input$opaciteElargie))/100,
                               colPos = isolate(input$colPos),
-                              colBorder = isolate(input$colBorderRonds),
+                              colBorderPos = isolate(input$colBorderRonds),
                               map_proxy = proxy)
 
         # on passe la carte leaflet en parametre (map_leaflet = react_carte()).
@@ -370,7 +370,7 @@ C&#39;est le contexte &#39;proxy&#39;.</p></li>
         # on met a jour la carte proxy pour les nouvelles couleurs des ronds et de leur bordure.
         proxy &lt;- set_couleur_ronds(map = proxy,
                                   colorPos = input$colPos,
-                                  colBorder = input$colBorderRonds,
+                                  colBorderPos = input$colBorderRonds,
                                   map_leaflet = react_carte())
 
         # ou bien en passant les parametres directement dans la fonction leaflet_ronds()
@@ -383,7 +383,7 @@ C&#39;est le contexte &#39;proxy&#39;.</p></li>
         #                       varVolume = &quot;POP_2015&quot;,
         #                       rayonRond = as.numeric(isolate(input$rayon_rond)),
         #                       colPos = input$colPos,
-        #                       colBorder = input$colBorderRonds,
+        #                       colBorderPos = input$colBorderRonds,
         #                       opacityElargi = as.numeric(isolate(input$opaciteElargie))/100,
         #                       map_proxy = proxy)
       }, ignoreInit = T)

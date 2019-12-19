@@ -323,16 +323,14 @@ ze13etplus &lt;- zonage_a_facon(fondMaille = com_dep_13_30_83_84,
                              idMaille = &quot;DEPCOM&quot;,
                              idGroupe = &quot;ZE2010&quot;,
                              libGroupe = &quot;LIB_ZE2010&quot;,
-                             fondContour = NULL,
-                             dom = &quot;0&quot;)
+                             fondContour = NULL)
 # creation du zonage des zones d&#39;emploi des Bouches-du-Rhone (partie tronquee des ze au contour du departement)
 ze13 &lt;- zonage_a_facon(fondMaille = com_dep_13_30_83_84,
                        groupe = donnees_a_facon,
                        idMaille = &quot;DEPCOM&quot;,
                        idGroupe = &quot;ZE2010&quot;,
                        libGroupe = &quot;LIB_ZE2010&quot;,
-                       fondContour = depm[depm$code==&quot;13&quot;,],
-                       dom = &quot;0&quot;)
+                       fondContour = depm[depm$code==&quot;13&quot;,])
 
 # visualisation de la geometrie
 # modification des marges
@@ -511,10 +509,14 @@ rapport_ronds(map)
 map &lt;- add_legende_ronds(map = map,
                          titre = &quot;Population en 2015&quot;,
                          zoom = 6)
+## [INFO] Les coordonnÃ©es de la lÃ©gende des ronds sont : longitude (x) =
+## 7.71612696800038 degrÃ© ; latitude (y) = 45.1268480101767 degrÃ©
 # ajout de la legende des classes (position par defaut)
 map &lt;- add_legende_classes(map = map,
                            titre = &quot;Variation ann.moy. 2010-2015&quot;,
                            zoom = 6)
+## [INFO] Les coordonnÃ©es de la lÃ©gende des classes sont : longitude (x) =
+## 7.71612696800038 degrÃ© ; latitude (y) = 42.9820332433454 degrÃ©
 
 # modification de la position de la legende des ronds et du niveau de zoom
 map &lt;- add_legende_ronds(map = map,
@@ -522,12 +524,16 @@ map &lt;- add_legende_ronds(map = map,
                          lng = 8,
                          lat = 44,
                          zoom = 8)
+## [INFO] Les coordonnÃ©es de la lÃ©gende des ronds sont : longitude (x) = 8
+## degrÃ© ; latitude (y) = 44 degrÃ©
 # modification de la position de la legende des classes et du niveau de zoom
 map &lt;- add_legende_classes(map = map,
                            titre = &quot;Variation ann.moy. 2010-2015&quot;,
                            lng = 7.5,
                            lat = 43.5,
                            zoom = 8)
+## [INFO] Les coordonnÃ©es de la lÃ©gende des classes sont : longitude (x) = 7.5
+## degrÃ© ; latitude (y) = 43.5 degrÃ©
 
 # ajout d&#39;une source a la carte
 map &lt;- add_source(map = map,
@@ -874,7 +880,7 @@ map &lt;- add_titre(map = map,
                  titre = &quot;Population des departements de la region Provence-Alpes-Cote d&#39;Azur en 2015 et son evolution depuis 2010&quot;)
 # modification de la couleur de bordure des ronds
 map &lt;- set_couleur_ronds(map = map,
-                         colBorder = &quot;grey&quot;)
+                         colBorderPos = &quot;grey&quot;)
 # modification du style de la palette
 map &lt;- set_couleur_classes(map = map,
                            stylePalette = &quot;InseePremiere&quot;)
