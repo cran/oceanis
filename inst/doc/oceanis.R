@@ -1,11 +1,11 @@
-## ----echo=FALSE----------------------------------------------------------
+## ----echo=FALSE---------------------------------------------------------------
 knitr::opts_chunk$set(collapse = TRUE)
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 donnees_monoloc <- rio::import(file = system.file("data/donnees_monoloc.rda",
                                                   package = "oceanis"))
 
-## ---- fig.width = 5------------------------------------------------------
+## ---- fig.width = 5-----------------------------------------------------------
 library(oceanis)
 
 # chargement des donnees
@@ -16,7 +16,7 @@ distrib_variable(data = donnees_monoloc,
                  varRatio = "VAR_AN_MOY",
                  nbClasses = 4)
 
-## ----fondCarte, fig.height = 3, fig.width = 3----------------------------
+## ----fondCarte, fig.height = 3, fig.width = 3---------------------------------
 # chemin du fond de carte .shp
 path_to_shp <- system.file("extdata",
                            "dep_francemetro_2018.shp",
@@ -30,7 +30,7 @@ par(mai = c(0,0,0,0))
 # contour des departements de France metropolitaine
 plot(sf::st_geometry(depm))
 
-## ----zonageAFacon, fig.height = 5, fig.width = 5-------------------------
+## ----zonageAFacon, fig.height = 5, fig.width = 5------------------------------
 library(oceanis)
 
 # chargement des donnees :
@@ -93,7 +93,7 @@ plot(sf::st_geometry(ze13etplus),
      lwd = 3,
      add = TRUE)
 
-## ----shinyRondsAnalyseClasses, eval = FALSE------------------------------
+## ----shinyRondsAnalyseClasses, eval = FALSE-----------------------------------
 #  library(oceanis)
 #  library(shiny)
 #  
@@ -129,7 +129,7 @@ plot(sf::st_geometry(ze13etplus),
 #                      varVolume = "POP_2015",
 #                      varRatio = "VAR_AN_MOY")
 
-## ----shinyJoignantes, eval = FALSE---------------------------------------
+## ----shinyJoignantes, eval = FALSE--------------------------------------------
 #  library(oceanis)
 #  library(shiny)
 #  
@@ -167,9 +167,13 @@ plot(sf::st_geometry(ze13etplus),
 #                   decalageAllerRetour = 10,
 #                   decalageCentroid = 20)
 
-## ----leafletAnalyseClassesRonds, fig.height = 6, fig.width = 9-----------
+## ----leafletAnalyseClassesRonds, fig.height = 6, fig.width = 9----------------
 library(oceanis)
 library(leaflet)
+library(sf)
+library(classInt)
+library(leaflet.extras)
+library(stringr)
 
 # chargement des donnees
 donnees_monoloc <- rio::import(file = system.file("data/donnees_monoloc.rda",
@@ -261,7 +265,7 @@ map <- set_opacite_elargi(map = map,
 # ajout d'un fond OpenStreetMap
 map <- add_fond_osm(map)
 
-## ----plotSaphirs, fig.height = 6, fig.width = 7--------------------------
+## ----plotSaphirs, fig.height = 6, fig.width = 7-------------------------------
 library(oceanis)
 
 # chargement des donnees
@@ -385,7 +389,7 @@ fond_saphirs <- plot_saphirs(data = donnees_biloc_saphirs,
                              colBorderMaille = "grey")
 
 
-## ----exportImage, eval = FALSE-------------------------------------------
+## ----exportImage, eval = FALSE------------------------------------------------
 #  
 #  library(grDevices)
 #  
@@ -444,7 +448,7 @@ fond_saphirs <- plot_saphirs(data = donnees_biloc_saphirs,
 #  
 #  dev.off()
 
-## ----exportQgis, eval = FALSE--------------------------------------------
+## ----exportQgis, eval = FALSE-------------------------------------------------
 #  library(oceanis)
 #  library(leaflet)
 #  
