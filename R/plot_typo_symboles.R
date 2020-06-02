@@ -1,5 +1,5 @@
 plot_typo_symboles <-
-function(fondPoints,listFonds,emprise="FRM",types=NULL,couleurs=NULL,tailles=NULL,epaisseurs=NULL,titreLeg="",xLeg=NULL,yLeg=NULL,titreCarte="",sourceCarte="",etiquettes=NULL,labels=NULL,xlim=NULL,ylim=NULL)
+  function(fondPoints,listFonds,emprise="FRM",types=NULL,couleurs=NULL,tailles=NULL,epaisseurs=NULL,titreLeg="",xLeg=NULL,yLeg=NULL,titreCarte="",sourceCarte="",etiquettes=NULL,labels=NULL,xlim=NULL,ylim=NULL)
   {
     options("stringsAsFactors"=FALSE)
 
@@ -40,8 +40,8 @@ function(fondPoints,listFonds,emprise="FRM",types=NULL,couleurs=NULL,tailles=NUL
 
     code_epsg <- switch(emprise, #emprise
                         "FRM"="2154",# Lambert 93
-                        "971"="32620",# UTM 20 N
-                        "972"="32620",# UTM 20 N
+                        "971"="5490",# UTM 20 N
+                        "972"="5490",# UTM 20 N
                         "973"="2972",# UTM 22 N
                         "974"="2975",# UTM 40 S
                         "976"="4471")# UTM 38 S
@@ -59,21 +59,24 @@ function(fondPoints,listFonds,emprise="FRM",types=NULL,couleurs=NULL,tailles=NUL
     y <- NULL
     for(i in 1:length(listFonds))
     {
-      x <- c(x,st_bbox(listFonds[[i]])$xmax-st_bbox(listFonds[[i]])$xmin)
-      y <- c(y,st_bbox(listFonds[[i]])$ymax-st_bbox(listFonds[[i]])$ymin)
+      x <- c(x,sf::st_bbox(listFonds[[i]])$xmax-sf::st_bbox(listFonds[[i]])$xmin)
+      y <- c(y,sf::st_bbox(listFonds[[i]])$ymax-sf::st_bbox(listFonds[[i]])$ymin)
     }
     xMax <- max(x)
     yMax <- max(y)
     ixMax <- which.max(x)
     iyMax <- which.max(y)
 
+    if(is.null(xlim)) xlim <- c(sf::st_bbox(listFonds[[ixMax]])$xmin,sf::st_bbox(listFonds[[ixMax]])$xmax+x_marge*3)
+    if(is.null(ylim)) ylim <- c(sf::st_bbox(listFonds[[iyMax]])$ymin,sf::st_bbox(listFonds[[iyMax]])$ymax+y_marge*3)
+
+    decalageLeg <- (xlim[2]-xlim[1])/20
+
     if(is.null(xLeg) | is.null(yLeg))
     {
-      xLeg <- st_bbox(fondPoints)$xmax-(st_bbox(fondPoints)$xmax-st_bbox(fondPoints)$xmin)/10
-      yLeg <- st_bbox(fondPoints)$ymax-(st_bbox(fondPoints)$ymax-st_bbox(fondPoints)$ymin)/10
+      xLeg <- sf::st_bbox(listFonds[[ixMax]])$xmax
+      yLeg <- sf::st_bbox(listFonds[[iyMax]])$ymax
     }
-
-    decalageLeg <- xMax/30
 
     for(i in 1:nrow(symbLeg))
     {
@@ -82,19 +85,35 @@ function(fondPoints,listFonds,emprise="FRM",types=NULL,couleurs=NULL,tailles=NUL
         yLeg <- c(yLeg,yLeg[length(yLeg)]-decalageLeg)
       }
     }
+
     xLeg <- c(xLeg,rep(xLeg,nrow(symbLeg)-1))
 
     pointsLeg <- data.frame(lng=xLeg,lat=yLeg,stringsAsFactors = FALSE)
-    listPointsLeg <- apply(pointsLeg,1, function(x) st_sf(geometry=st_sfc(st_point(x),crs=paste0("+init=epsg:",code_epsg))))
+    listPointsLeg <- apply(pointsLeg,1, function(x) sf::st_sf(geometry=sf::st_sfc(sf::st_point(x),crs=paste0("+init=epsg:",code_epsg))))
     fondPointsLeg <- do.call("rbind",listPointsLeg)
+
+    x_marge <- xMax/20
+    y_marge <- yMax/20
+
+    if(is.null(xLeg) | is.null(yLeg))
+    {
+      xLeg <- xlim[2]-(xlim[2]-xlim[1])/10
+      yLeg <- ylim[2]-(ylim[2]-ylim[1])/10
+    }
+    x_large <- (xlim[2]-xlim[1])/20
+    y_large <- x_large/1.5
+
+    xmin <- min(sf::st_coordinates(fondPointsLeg)[,1]) - x_large
+    xmax <- max(sf::st_coordinates(fondPointsLeg)[,1]) + (x_large*5)
+    ymin <- min(sf::st_coordinates(fondPointsLeg)[,2]) - (y_large*2)
+    ymax <- max(sf::st_coordinates(fondPointsLeg)[,2]) + (y_large*3)
+    bbox_leg_typo_symboles <- matrix(c(xmin,ymax, xmax,ymax, xmax,ymin, xmin,ymin, xmin,ymax),ncol=2, byrow=TRUE)
+    bbox_leg_typo_symboles <- sf::st_sf(geometry=sf::st_sfc(sf::st_polygon(list(bbox_leg_typo_symboles))),crs=sf::st_crs(fondPoints))
 
     if(!is.null(etiquettes))
     {
       tableEtiquettes <- table_etiquettes(listFonds[[1]],etiquettes)
     }
-
-    if(is.null(xlim)) xlim <- c(st_bbox(listFonds[[1]])$xmin,st_bbox(listFonds[[1]])$xmax+x_marge*3)
-    if(is.null(ylim)) ylim <- c(st_bbox(listFonds[[1]])$ymin,st_bbox(listFonds[[1]])$ymax+y_marge*3)
 
     par(mai=c(0,0,0,0))
 
@@ -107,31 +126,17 @@ function(fondPoints,listFonds,emprise="FRM",types=NULL,couleurs=NULL,tailles=NUL
 
       if(i==1)
       {
-        if(is.null(xlim) | is.null(ylim))
-        {
-          plot(st_geometry(listFonds[[1]]),col=colFond,border=colBorder,lwd=epaisseur)
-        }else
-        {
-          plot(st_geometry(listFonds[[1]]),xlim=xlim,ylim=ylim,col=colFond,border=colBorder,lwd=epaisseur)
-        }
+        plot(sf::st_geometry(listFonds[[1]]),xlim=xlim,ylim=ylim,col=colFond,border=colBorder,lwd=epaisseur)
       }else
       {
-        plot(st_geometry(listFonds[[i]]),col=colFond,border=colBorder,lwd=epaisseur,add=T)
+        plot(sf::st_geometry(listFonds[[i]]),col=colFond,border=colBorder,lwd=epaisseur,add=T)
       }
     }
 
     for(i in 1:nrow(fondPoints))
     {
-      plot(st_geometry(fondPoints[i,]),pch=types[i],col=couleurs[i],border=colBorder[i],cex=tailles[i],lwd=epaisseurs[i],add=T)
+      plot(sf::st_geometry(fondPoints[i,]),pch=types[i],col=couleurs[i],border=colBorder[i],cex=tailles[i],lwd=epaisseurs[i],add=T)
     }
-
-    for(i in 1:nrow(symbLeg))
-    {
-      plot(st_geometry(fondPointsLeg[i,]),pch=types[i],col=couleurs[i],border=colBorder[i],cex=tailles[i],lwd=epaisseurs[i],add=T)
-      text(pointsLeg[i,1]+decalageLeg,pointsLeg[i,2],labels=labels[i],cex=0.9,adj=0)
-    }
-
-    text(pointsLeg[1,1],pointsLeg[1,2]+decalageLeg,labels=titreLeg,cex=1,adj=0)
 
     if(!is.null(etiquettes))
     {
@@ -141,18 +146,24 @@ function(fondPoints,listFonds,emprise="FRM",types=NULL,couleurs=NULL,tailles=NUL
       }
     }
 
-    x_marge <- xMax/20
-    y_marge <- yMax/20
+    # suppressWarnings(plot(bbox_leg_typo_symboles,add=T,col="white",border="white",lwd=1))
 
+    for(i in 1:nrow(symbLeg))
+    {
+      plot(sf::st_geometry(fondPointsLeg[i,]),pch=types[i],col=couleurs[i],border=colBorder[i],cex=tailles[i],lwd=epaisseurs[i],add=T)
+      text(pointsLeg[i,1]+decalageLeg,pointsLeg[i,2],labels=labels[i],cex=0.7,adj=0)
+    }
+
+    text(pointsLeg[1,1],pointsLeg[1,2]+decalageLeg,labels=titreLeg,cex=1,adj=0)
 
     if(titreCarte!="")
     {
-      text(((st_bbox(listFonds[[ixMax]])$xmin)+(st_bbox(listFonds[[ixMax]])$xmax-st_bbox(listFonds[[ixMax]])$xmin)/2),st_bbox(listFonds[[iyMax]])$ymax+y_marge*3,labels=titreCarte)
+      text((xlim[1]+xlim[2])/2,ylim[2]-y_marge/2,labels=titreCarte)
     }
 
     if(sourceCarte!="")
     {
-      text(((st_bbox(listFonds[[ixMax]])$xmax+x_marge*3)-st_bbox(listFonds[[ixMax]])$xmin)/6,st_bbox(listFonds[[iyMax]])$ymin,labels=sourceCarte,cex=0.7)
+      text(xlim[1]+(xlim[2]-xlim[1])/6,ylim[1]+y_marge/2,labels=sourceCarte,cex=0.7)
     }
 
     message(simpleMessage(paste0("[INFO] Les coordonnees de la legende sont x = ", xLeg[1]," metres ; y = ", yLeg[1]," metres")))

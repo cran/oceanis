@@ -1,4 +1,29 @@
-﻿Changes in version 1.0.8
+Changes in version 1.8.0
+
+Changes in version 1.7.3
+
+BUG FIXES and IMPROVEMENTS
+
+- Correction d'un bug dans la fonction plot_typo_symbole.
+- Amélioration de l'affichage de la carte.
+- Depend R >= 3.3.0
+
+Changes in version 1.7.2
+
+FEATURES
+
+- Pour les fonctions plot_, ajout d'un cadre blanc autour des legendes.
+
+BUG FIXES and IMPROVEMENTS
+
+- Adaptation du CRS des fonds DOM et suite à la maj de RSpatial et sf.
+
+Changes in version 1.7.1
+
+BUG FIXES and IMPROVEMENTS
+- Nouvelle numerotation du package. 1er et 2eme chiffre = versions. 3eme chiffre = release.
+- Pour les fonctions plot_classes, plot_ronds_classes, plot_classes_ronds et plot_typo, reduction de la taille de la legende des classes lorsque les paramètres xlim et ylim sont renseignés pour zoomer sur une maille.
+
 
 Changes in version 1.0.7
 
@@ -12,7 +37,7 @@ Changes in version 1.0.6
 
 FEATURES
 
-- Pour les fonctions leaflet_xxx et shiny_xxx, possibilite de choisir un fond d'habillage personnalise (par defaut France metro+DOM). Utile pour creer des cartes avec l'Europe ou d'autres pays par exemple. Le parametre dom est renomme emprise (par defaut emprise="FRM"), ajout de la modalite "999" pour etranger. 
+- Pour les fonctions leaflet_xxx et shiny_xxx, possibilite de choisir un fond d'habillage personnalise (par defaut France metro+DOM). Utile pour creer des cartes avec l'Europe ou d'autres pays par exemple. Le parametre dom est renomme emprise (par defaut emprise="FRM"), ajout de la modalite "999" pour etranger.
 - Nouvelle fonction pour le groupe leaflet : set_pop_up pour modifier le texte des pop-up lors du clic sur un element de la maille. Possibilite d'inclure du HTML. Uniquement pour les analyses en ronds, en classes et les combines des deux.
 - Nouvelle fonction pour le groupe leaflet : set_bordure_ronds pour modifier l'apparence des bordures des ronds (couleur et epaisseur). La gestion de le bordure des ronds est dissocies de la fonction set_couleur_ronds.
 - Nouveau parametre 'epaisseurBorder', 'colBorderPos' et 'colBorderNeg' aux fonctions leaflet_ronds, leaflet_ronds_classes et leaflet_classes_ronds. Suppression du parametre 'colBorder' pour ces memes fonctions.
