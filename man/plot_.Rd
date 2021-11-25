@@ -18,7 +18,7 @@ NULL, idData, varVolume, rayonRond = NULL, rapportRond = NULL, emprise =
 "FRM", fondChx = NULL, precisionLegRonds = 0, titreLeg = "", xLeg = NULL,
 yLeg = NULL, cadreLeg = FALSE, xLimCadreLeg = NULL, yLimCadreLeg = NULL,
 titreCarte = "", sourceCarte = "", etiquettes = NULL, colPos =
-"#CD853F", colNeg = "#6495ED", colBorder = "white", colBorderMaille =
+"#EB617F", colNeg = "#286AC7", colBorder = "white", colBorderMaille =
 "black", xlim = NULL, ylim = NULL)
 
 plot_classes(data, fondMaille, fondSousAnalyse = NULL, fondSurAnalyse =
@@ -75,7 +75,7 @@ NULL, filtreVol = 0, filtreDist = 100, filtreMajeurs = 10,
 decalageAllerRetour = 0, decalageCentroid = 0, emprise = "FRM",
 precisionLegFleches = 0, titreLeg = "", xLeg = NULL, yLeg = NULL,
 cadreLeg = FALSE, xLimCadreLeg = NULL, yLimCadreLeg = NULL, titreCarte = "",
-sourceCarte = "", etiquettes = NULL, colFleche = "#CD853F", colBorder
+sourceCarte = "", etiquettes = NULL, colFleche = "#286AC7", colBorder
 = "white", colBorderMaille = "black", xlim = NULL, ylim = NULL)
 
 plot_saphirs(data, fondMaille, fondSousAnalyse = NULL, fondSurAnalyse =
@@ -83,7 +83,7 @@ NULL, typeMaille, idDataDepart, idDataArrivee, varFlux, largeurFlecheMax =
 NULL, direction = "Ent", filtreVol = 0, emprise = "FRM", precisionLegFleches
 = 0, titreLeg = "", xLeg = NULL, yLeg = NULL, cadreLeg = FALSE,
 xLimCadreLeg = NULL, yLimCadreLeg = NULL, titreCarte = "", sourceCarte = "",
-etiquettes = NULL, colEntree = "#CD853F", colSortie = "#6495ED",
+etiquettes = NULL, colEntree = "#EB617F", colSortie = "#286AC7",
 colBorder = "white", colBorderMaille = "black", xlim = NULL, ylim = NULL)
 }
 \arguments{
@@ -257,14 +257,15 @@ des classes dans le systeme de projection locale. Par defaut a NULL.}
 carte. Par defaut a NULL. Voir details.}
 
 \item{colPos}{chaine de caracteres (character). Couleur nommee (par exemple
-"orange") ou hexadecimal (par exemple "#FFA500"). Par defaut "#CD853F".}
+"orange") ou hexadecimal (par exemple "#FFA500"). Par defaut "#EB617F".}
 
 \item{colNeg}{chaine de caracteres (character). Couleur nommee (par exemple
-"blue") ou hexadecimal (par exemple "#0000FF"). Par defaut "#6495ED".}
+"blue") ou hexadecimal (par exemple "#0000FF"). Par defaut "#286AC7".}
 
 \item{stylePalette}{chaine de caracteres (character). Palette de la charte
-INSEE. A choisir entre "InseeFlash", "InseeAnalyse", "InseeDossier",
-"InseePremiere" ou "defaut" (par defaut).}
+INSEE. A choisir entre "defaut", "Insee_Rouge", "Insee_Jaune", "Insee_Bleu",
+"Insee_Turquoise", "Insee_Vert", "Insee_Violet" ou "Insee_Gris" 
+(voir 'affiche_palette(nomPalette)').}
 
 \item{palettePos}{vecteur de caracteres (character). Couleurs nommees (par
 exemple c("red","orange","yellow")) ou hexadecimal (par exemple
@@ -299,15 +300,15 @@ exemple "grey") ou hexadecimal (par exemple "#808080"). Par defaut
 
 \item{colFleche}{chaine de caracteres (character). Couleur nommee (par
 exemple "orange") ou hexadecimal (par exemple "#FFA500"). Par defaut
-"#CD853F".}
+"#286AC7".}
 
 \item{colEntree}{chaine de caracteres (character). Couleur nommee (par
 exemple "orange") ou hexadecimal (par exemple "#FFA500"). Par defaut
-"#CD853F".}
+"#EB617F".}
 
 \item{colSortie}{chaine de caracteres (character). Couleur nommee (par
 exemple "blue") ou hexadecimal (par exemple "#0000FF"). Par defaut
-"#6495ED".}
+"#286AC7".}
 
 \item{xlim}{vecteur numerique (numeric). Coordonnees xmin et xmax de la
 carte. Par defaut a NULL.}

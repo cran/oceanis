@@ -1,4 +1,48 @@
+Changes in version 1.8.4
+
+BUG FIXES and IMPROVEMENTS
+
+- Pour les fonctions leaflet_xxx et shiny_xxx, amélioration de l'affichage des légendes des ronds, classes et flèches.
+- Simplification du code.
+- Correction de bugs divers.
+
+Changes in version 1.8.3
+
+BUG FIXES and IMPROVEMENTS
+
+- Pour les fonctions leaflet_xxx et shiny_xxx, modification de la gestion d'affichage des légendes des ronds, classes et flèches : construction de la légende et initialisation de l'objet leaflet en projection locale métrique. La reprojection en WGS84 est faite automatiquement à l'affichage de la carte. Cela permet de supprimer les éventuelles déformations de la légende selon la position lon/lat choisie.
+- Lors d'un export Qgis, les valeurs des légendes des ronds et des flèches sont affichées directement dans le canevas de la carte et non plus que dans le composeur d'impression.
+- Corrections de bugs dans la gestion des bornes de classes.
+
+Changes in version 1.8.2
+
+BUG FIXES and IMPROVEMENTS
+
+- Création d'un dossier layers pour tous les fonds exportés lors d'un export Qgis.
+
+Changes in version 1.8.1
+
+FEATURES
+
+- Les palettes négatives pour le turquoise, vert, violet et gris ne porte plus la mention Insee (Turquoise_Neg_XN_0P, Vert_Neg_XN_0P, Violet_Neg_XN_0P, Gris_Neg_XN_0P).
+- Pour les fonctions shiny_xxx, possibilité de changer de palettes de couleurs depuis l'interface shiny.
+- Les couleurs de la palette "defaut" correspondent aux couleurs de la palette "RdYlBu" de ColorBrewer.
+
 Changes in version 1.8.0
+
+FEATURES
+
+- Nouvelles palettes de la charte graphique INSEE ("defaut", "Insee_Rouge", "Insee_Jaune", "Insee_Bleu", "Insee_Turquoise", "Insee_Vert", "Insee_Violet" et "Insee_Gris",). La palette "defaut" conserve les couleurs par défaut de l'ancienne palette (inspirées de la collection InseeFlash).
+- Nouvelles données data("palettes_insee") pour charger les codes hexadecimaux par palette.
+- Nouvelle fonction affiche_palette(nomPalette = "defaut") pour visualiser les palettes individuellement.
+- La fonction recup_palette a ausi été mise à jour. Les modalités pour stylePalette sont les mêmes que pour affiche_palette. Deux arguments ont été ajoutés : nbNeg et nbPos (par défaut à 0). Attention, au moins un des deux arguments doit être > à 0 pour récupérer une palette et <= à 6.
+- Mise à jour de la documentation et des captures d'écran (aide, vignette oceanis, README)
+
+BUG FIXES and IMPROVEMENTS
+
+- Prise en compte de la borne autour de zéro hors palette (gris clair).
+- Correction d'un bug lors de l'export de cartes Qgis en analyse en classes dans ronds.
+- Ajout des chemins relatifs pour l'accès aux fonds exportés des export Qgis à la place des chemins absolus.
 
 Changes in version 1.7.5.2
 

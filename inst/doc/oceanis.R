@@ -248,14 +248,15 @@ map <- add_titre(map = map,
                  titre = "Population des departements de la region Provence-Alpes-Cote d'Azur en 2015 et son evolution depuis 2010")
 
 # affichage de la palette par defaut
-recup_palette(stylePalette = "defaut")
+# affiche_palette(nomPalette = "defaut")
+recup_palette(stylePalette = "defaut", nbPos = 3)
 
-# affichage de la palette InseePremiere
-recup_palette(stylePalette = "InseePremiere")
+# affichage de la palette Insee_Rouge
+recup_palette(stylePalette = "Insee_Rouge", nbPos = 3)
 
 # modification du style de la palette et de la bordure des ronds
 map <- set_couleur_classes(map = map,
-                           stylePalette = "InseePremiere",
+                           stylePalette = "Insee_Rouge",
                            colBorder = "grey")
 
 # modification de l'opacite de la representation elargie
@@ -310,7 +311,6 @@ fond_saphirs <- plot_saphirs(data = donnees_biloc_saphirs,
                              yLeg = 6470000,
                              titreCarte = "Migrations residentielles vers l'Ile-de-France",
                              sourceCarte = "Source : INSEE - RP2016",
-                             colEntree = "#D2691E",
                              colBorder = "transparent",
                              colBorderMaille = "grey")
 
@@ -349,7 +349,6 @@ fond_saphirs <- plot_saphirs(data = donnees_biloc_saphirs,
                              titreCarte = "Migrations residentielles vers l'Ile-de-France",
                              sourceCarte = "Source : INSEE - RP2016",
                              etiquettes = etiquettes,
-                             colEntree = "#D2691E",
                              colBorder = "transparent",
                              colBorderMaille = "grey")
 
@@ -384,7 +383,6 @@ fond_saphirs <- plot_saphirs(data = donnees_biloc_saphirs,
                              titreCarte = "Migrations residentielles vers l'Ile-de-France",
                              sourceCarte = "Source : INSEE - RP2016",
                              etiquettes = etiquettes,
-                             colEntree = "#D2691E",
                              colBorder = "transparent",
                              colBorderMaille = "grey")
 
@@ -416,7 +414,6 @@ fond_saphirs <- plot_saphirs(data = donnees_biloc_saphirs,
 #                               titreCarte = "Migrations residentielles vers l'Ile-de-France",
 #                               sourceCarte = "Source : INSEE - RP2016",
 #                               etiquettes = etiquettes,
-#                               colEntree = "#D2691E",
 #                               colBorder = "transparent",
 #                               colBorderMaille = "grey")
 #  
@@ -442,7 +439,6 @@ fond_saphirs <- plot_saphirs(data = donnees_biloc_saphirs,
 #                               titreCarte = "Migrations residentielles vers l'Ile-de-France",
 #                               sourceCarte = "Source : INSEE - RP2016",
 #                               etiquettes = etiquettes,
-#                               colEntree = "#D2691E",
 #                               colBorder = "transparent",
 #                               colBorderMaille = "grey")
 #  
@@ -499,14 +495,14 @@ fond_saphirs <- plot_saphirs(data = donnees_biloc_saphirs,
 #  map <- add_titre(map = map,
 #                   titre = "Population des departements de la region Provence-Alpes-Cote d'Azur en 2015 et son evolution depuis 2010")
 #  # modification de la couleur de bordure des ronds
-#  map <- set_couleur_ronds(map = map,
+#  map <- set_bordure_ronds(map = map,
 #                           colBorderPos = "grey")
 #  # modification du style de la palette
 #  map <- set_couleur_classes(map = map,
-#                             stylePalette = "InseePremiere")
+#                             stylePalette = "Insee_Rouge")
 #  # modification de l'opacite de la representation elargie
 #  map <- set_opacite_elargi(map,
-#                            opacite = 0.3)
+#                            opacite = 0.6)
 #  
 #  export_qgis_ronds_classes(map,
 #                            cheminDossier = getwd(),

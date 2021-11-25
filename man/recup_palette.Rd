@@ -4,62 +4,66 @@
 \alias{recup_palette}
 \title{Returns a palette of the graphic chart of INSEE}
 \usage{
-recup_palette(stylePalette)
+recup_palette(stylePalette, nbNeg = 0, nbPos = 0)
 }
 \arguments{
 \item{stylePalette}{chaine de caracteres (character). A choisir parmi
-"InseeFlash", "InseeAnalyse", "InseeDossier", "InseePremiere" ou "defaut".}
+"defaut", "Insee_Rouge", "Insee_Jaune", "Insee_Bleu", "Insee_Turquoise",
+"Insee_Vert", "Insee_Violet", "Insee_Gris", "Turquoise_Neg", "Vert_Neg",
+"Violet_Neg" ou "Gris_Neg".}
+
+\item{nbNeg}{numeric. Nombre de classes negatives. De 0 (par défaut) à 6.}
+
+\item{nbPos}{numeric. Nombre de classes positives. De 0 (par défaut) à 6.}
 }
 \value{
-Retourne une liste de deux vecteurs caracteres.
+Retourne une liste d'un vecteur caracteres.
 }
 \description{
 Returns a palette of the graphic chart of INSEE.
 }
 \details{
-Les palettes proposees sont celles utilisees dans les publications Insee.
-Seule la palette par defaut propose des couleurs supplementaires par rapport
-a la palette utilisee dans la publication InsesFlash.
+Les couleurs de palettes préfixées par "Insee_" sont celles de la charte graphique
+INSEE. En exécutant la fonction affiche_palette(nomPalette), il est possible de visualiser
+les couleurs de chaque palette disponible.
+Les modalités pour l'argument 'nomPalette' sont "Insee_Rouge", "Insee_Jaune", Insee_Bleu",
+"Insee_Turquoise", "Insee_Vert", "Insee_Violet" et "Insee_Gris" pour les palettes de la
+charte graphique INSEE, "defaut", "Turquoise_Neg", "Vert_Neg", "Violet_Neg" et "Gris_Neg"
+pour les palettes hors charte.
 
-La fonction renvoie une liste de deux vecteurs. Le premier element de la
-liste correspond aux couleurs des valeurs positives et le deuxieme aux
-couleurs des valeurs negatives.
+La palette "defaut" reprend les couleurs de la palette RdYlBu de ColorBrewer.
 
-Les couleurs sont classees du plus fonce au plus clair pour les palettes des
-valeurs positives et du plus clair au plus fonce pour les palettes des
-valeurs negatives.
+Seules les palettes "Insee_Rouge" et "Insee_Jaune" proposent des palettes pour des valeurs
+négatives et positives. Pour ces deux palettes, la palette "Insee_Bleu" est utilisée
+pour représenter les valeurs négatives. Cette dernière peut également être utilisée seule 
+pour des valeurs uniquement positives ou négatives.
 
-Le code des couleurs est le code hexadecimal.
+La fonction renvoie une liste d'un vecteur composé du nom de la palette au format
+nomPalette_xN_yP et des valeurs hexadécimales de la palette.
 
-\itemize{ \item InseeFlash positives : "#9B231C", "#B24B1D", "#D47130",
-"#E4A75A", "#F2CE93" \item InseeFlash negatives :
-"#ECF1FA","#C9DAF0","#95BAE2","#5182B6","#005289" \item InseeAnalyse
-positives : "#5E2057","#853567","#8E5981","#BA97B2","#D7C0CC" \item
-InseeAnalyse negatives : "#ECF1FA","#C9DAF0","#95BAE2","#5182B6","#005289"
-\item InseeDossier positives :
-"#4F185E","#65317B","#9475A5","#BFA5C6","#E7D1E5" \item InseeDossier
-negatives : "#ECF1FA","#C9DAF0","#95BAE2","#5182B6","#005289" \item
-InseePremiere positives : "#7F0029","#CC1543","#DE635B","#F79C85","#FDE3DE"
-\item InseePremiere negatives :
-"#ECF4D8","#CDD78C","#91B778","#549534","#005941" \item defaut positives :
-"#5A0A14","#82141B","#9B231C","#B24B1D","#D47130","#E4A75A","#F2CE93" \item
-defaut negatives :
-"#C9DAF0","#95BAE2","#5182B6","#005289","#003269","#001E5A","#000050" }
+La liste des valeurs hexadécimales de toutes les palettes est disponible en
+chargeant les données suivantes : data("palettes_insee").
+
+Il est obligatoire de spécifier un nombre de classes négatives ou positives supérieur à 0 et
+jusqu'à 6 maximum.
+Un message d'erreur apparaîtra si les choix du nombre de couleurs négatives et positives
+ne sont pas adaptés à la palette spécifiée.
 }
 \examples{
 
-recup_palette("InseeFlash")
+recup_palette(stylePalette = "defaut", nbNeg = 3, nbPos = 3)
 
-#[[1]]
-#[1] "#9B231C" "#B24B1D" "#D47130" "#E4A75A" "#F2CE93"
-#[[2]]
-#[1] "#ECF1FA" "#C9DAF0" "#95BAE2" "#5182B6" "#005289"
+# $defaut_3N3P
+# [1] "#003269" "#005289" "#95BAE2" "#E4A75A" "#D47130" "#B24B1D"
 
 }
 \references{
 Un convertisseur de couleurs pour visualiser une couleur a
 partir de son nom, son code hexadecimal ou RGB :
 http://www.proftnj.com/RGB3.htm
+
+ColorBrewer 2.0 :
+https://colorbrewer2.org/#type=diverging&scheme=RdYlBu&n=10
 }
 \seealso{
 \code{\link{set_couleur_classes}}

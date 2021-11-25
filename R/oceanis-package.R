@@ -436,6 +436,12 @@ NULL
 #' de type c(bornes1,bornes2,...). Le nombre de bornes correspond au nombre de
 #' classes -1 \code{(length(bornes)==nbClasses-1)}. Il n'est pas obligatoire de
 #' specifier les valeurs min et max.  }
+#' 
+#' Les palettes de couleurs disponibles sont celles de la Charte Graphique
+#' INSEE. En exécutant la fonction affiche_palette(nomPalette), il est
+#' possible de visualiser les couleurs de chaque palette disponible. A choisir
+#' entre "defaut", "Insee_Rouge", "Insee_Jaune",  "Insee_Bleu", "Insee_Turquoise",
+#' "Insee_Vert", "Insee_Violet" ou "Insee_Gris".
 #'
 #' \item{Analyse en classes dans ronds proportionnels}{ L'analyse en classes
 #' colore l'interieur des ronds (fonction \code{leaflet_ronds_classes()}) }
@@ -489,7 +495,7 @@ NULL
 #'
 #' leaflet_ronds(data, fondMaille, fondMailleElargi = NULL, fondSuppl = NULL,
 #' idData, varVolume, rayonRond = NULL, rapportRond = NULL, emprise = "FRM",
-#' fondEtranger = NULL, fondChx = NULL, colPos = "#CD853F", colNeg = "#6495ED",
+#' fondEtranger = NULL, fondChx = NULL, colPos = "#EB617F", colNeg = "#286AC7",
 #' colBorderPos = "white", colBorderNeg = "white", epaisseurBorder = 1,
 #' opacityElargi = 0.6, zoomMaille = NULL, map_proxy = NULL)
 #'
@@ -525,12 +531,12 @@ NULL
 #' leaflet_joignantes(data, fondMaille, typeMaille, fondSuppl = NULL,
 #' idDataDepart, idDataArrivee, varFlux, largeurFlecheMax = NULL, filtreVol =
 #' 0, filtreDist = 100, filtreMajeurs = 10, decalageAllerRetour = 0,
-#' decalageCentroid = 0, colFleche = "#CD853F", colBorder = "#303030", emprise
+#' decalageCentroid = 0, colFleche = "#286AC7", colBorder = "#303030", emprise
 #' = "FRM", fondEtranger = NULL, zoomMaille = NULL, map_proxy = NULL)
 #'
 #' leaflet_saphirs(data, fondMaille, typeMaille, fondSuppl = NULL,
 #' idDataDepart, idDataArrivee, varFlux, largeurFlecheMax = NULL, direction =
-#' "Ent", filtreVol = 0, colEntree = "#CD853F", colSortie = "#6495ED",
+#' "Ent", filtreVol = 0, colEntree = "#EB617F", colSortie = "#286AC7",
 #' colBorder = "#303030", emprise = "FRM", fondEtranger = NULL, zoomMaille =
 #' NULL, map_proxy = NULL)
 #'
@@ -593,9 +599,9 @@ NULL
 #' @param decalageCentroid valeur numerique (numeric). Decalage des fleches
 #' depuis et vers les centroides des territoires (km).
 #' @param colPos chaine de caracteres (character). Couleur nommee (par exemple
-#' "orange") ou hexadecimal (par exemple "#FFA500"). Par defaut "#CD853F".
+#' "orange") ou hexadecimal (par exemple "#FFA500"). Par defaut "#EB617F".
 #' @param colNeg chaine de caracteres (character). Couleur nommee (par exemple
-#' "blue") ou hexadecimal (par exemple "#0000FF"). Par defaut "#6495ED".
+#' "blue") ou hexadecimal (par exemple "#0000FF"). Par defaut "#286AC7".
 #' @param colBorder chaine de caracteres (character). Couleur nommee (par
 #' exemple "white") ou hexadecimal (par exemple "#FFFFFF"). Par defaut "white"
 #' pour les classes, "#303030" pour les fleches.
@@ -615,17 +621,18 @@ NULL
 #' @param epaisseurBorder chaine de caracteres (numeric). Epaisseur de la
 #' bordure des ronds. Par defaut a 1".
 #' @param stylePalette chaine de caracteres (character). Palette de la charte
-#' INSEE. A choisir entre "InseeFlash", "InseeAnalyse", "InseeDossier",
-#' "InseePremiere" ou "defaut" (par defaut).
+#' INSEE. A choisir entre "defaut", "Insee_Rouge", "Insee_Jaune", "Insee_Bleu",
+#' "Insee_Turquoise", "Insee_Vert", "Insee_Violet" ou "Insee_Gris"
+#' (voir 'affiche_palette(nomPalette)').
 #' @param colFleche chaine de caracteres (character). Couleur nommee (par
 #' exemple "orange") ou hexadecimal (par exemple "#FFA500"). Par defaut
-#' "#CD853F".
+#' "#286AC7".
 #' @param colEntree chaine de caracteres (character). Couleur nommee (par
 #' exemple "orange") ou hexadecimal (par exemple "#FFA500"). Par defaut
-#' "#CD853F".
+#' "#EB617F".
 #' @param colSortie chaine de caracteres (character). Couleur nommee (par
 #' exemple "blue") ou hexadecimal (par exemple "#0000FF"). Par defaut
-#' "#6495ED".
+#' "#286AC7".
 #' @param opacityElargi valeur numerique (numeric). Opacite de la
 #' representation elargie. Par defaut a 0.6 (valeur comprise entre
 #' 0-transparent et 1-opaque).
@@ -931,7 +938,7 @@ NULL
 #' "FRM", fondChx = NULL, precisionLegRonds = 0, titreLeg = "", xLeg = NULL,
 #' yLeg = NULL, cadreLeg = FALSE, xLimCadreLeg = NULL, yLimCadreLeg = NULL,
 #' titreCarte = "", sourceCarte = "", etiquettes = NULL, colPos =
-#' "#CD853F", colNeg = "#6495ED", colBorder = "white", colBorderMaille =
+#' "#EB617F", colNeg = "#286AC7", colBorder = "white", colBorderMaille =
 #' "black", xlim = NULL, ylim = NULL)
 #'
 #' plot_classes(data, fondMaille, fondSousAnalyse = NULL, fondSurAnalyse =
@@ -988,7 +995,7 @@ NULL
 #' decalageAllerRetour = 0, decalageCentroid = 0, emprise = "FRM",
 #' precisionLegFleches = 0, titreLeg = "", xLeg = NULL, yLeg = NULL,
 #' cadreLeg = FALSE, xLimCadreLeg = NULL, yLimCadreLeg = NULL, titreCarte = "",
-#' sourceCarte = "", etiquettes = NULL, colFleche = "#CD853F", colBorder
+#' sourceCarte = "", etiquettes = NULL, colFleche = "#286AC7", colBorder
 #' = "white", colBorderMaille = "black", xlim = NULL, ylim = NULL)
 #'
 #' plot_saphirs(data, fondMaille, fondSousAnalyse = NULL, fondSurAnalyse =
@@ -996,7 +1003,7 @@ NULL
 #' NULL, direction = "Ent", filtreVol = 0, emprise = "FRM", precisionLegFleches
 #' = 0, titreLeg = "", xLeg = NULL, yLeg = NULL, cadreLeg = FALSE,
 #' xLimCadreLeg = NULL, yLimCadreLeg = NULL, titreCarte = "", sourceCarte = "",
-#' etiquettes = NULL, colEntree = "#CD853F", colSortie = "#6495ED",
+#' etiquettes = NULL, colEntree = "#EB617F", colSortie = "#286AC7",
 #' colBorder = "white", colBorderMaille = "black", xlim = NULL, ylim = NULL)
 #'
 #' @param data tableau de donnees (data.frame).
@@ -1116,12 +1123,13 @@ NULL
 #' (data.frame). Liste des codes de la maille dont on affiche le libelle sur la
 #' carte. Par defaut a NULL. Voir details.
 #' @param colPos chaine de caracteres (character). Couleur nommee (par exemple
-#' "orange") ou hexadecimal (par exemple "#FFA500"). Par defaut "#CD853F".
+#' "orange") ou hexadecimal (par exemple "#FFA500"). Par defaut "#EB617F".
 #' @param colNeg chaine de caracteres (character). Couleur nommee (par exemple
-#' "blue") ou hexadecimal (par exemple "#0000FF"). Par defaut "#6495ED".
+#' "blue") ou hexadecimal (par exemple "#0000FF"). Par defaut "#286AC7".
 #' @param stylePalette chaine de caracteres (character). Palette de la charte
-#' INSEE. A choisir entre "InseeFlash", "InseeAnalyse", "InseeDossier",
-#' "InseePremiere" ou "defaut" (par defaut).
+#' INSEE. A choisir entre "defaut", "Insee_Rouge", "Insee_Jaune", "Insee_Bleu",
+#' "Insee_Turquoise", "Insee_Vert", "Insee_Violet" ou "Insee_Gris" 
+#' (voir 'affiche_palette(nomPalette)').
 #' @param palettePos vecteur de caracteres (character). Couleurs nommees (par
 #' exemple c("red","orange","yellow")) ou hexadecimal (par exemple
 #' c("#FFA500")). Par defaut a NULL.
@@ -1146,13 +1154,13 @@ NULL
 #' "#303030".
 #' @param colFleche chaine de caracteres (character). Couleur nommee (par
 #' exemple "orange") ou hexadecimal (par exemple "#FFA500"). Par defaut
-#' "#CD853F".
+#' "#286AC7".
 #' @param colEntree chaine de caracteres (character). Couleur nommee (par
 #' exemple "orange") ou hexadecimal (par exemple "#FFA500"). Par defaut
-#' "#CD853F".
+#' "#EB617F".
 #' @param colSortie chaine de caracteres (character). Couleur nommee (par
 #' exemple "blue") ou hexadecimal (par exemple "#0000FF"). Par defaut
-#' "#6495ED".
+#' "#286AC7".
 #' @param xlim vecteur numerique (numeric). Coordonnees xmin et xmax de la
 #' carte. Par defaut a NULL.
 #' @param ylim vecteur numerique (numeric). Coordonnees ymin et ymax de la
@@ -1225,36 +1233,20 @@ NULL
 #'
 #' @description Modify the colors of 'leaflet' map's analysis.
 #'
-#' @details Les palettes proposees pour l'analyse en classes sont celles utilisees dans
-#' les publications Insee. Seule la palette par defaut propose des couleurs
-#' supplementaires par rapport a la palette utilisee dans la publication
-#' InsesFlash.
+#' @details Les palettes proposées pour l'analyse en classes sont celles
+#' utilisées par la Charte Graphique INSEE. Utilisez la fonction
+#' affiche_palette(nomPalette) pour visualiser les couleurs d'une palette.
+#' L'argument 'nomPalette' peut prendre comme valeur : "defaut", "Insee_Rouge",
+#' "Insee_Jaune", "Insee_Bleu", "Insee_Turquoise", "Insee_Vert", "Insee_Violet"
+#' ou "Insee_Gris".
 #'
-#' Les couleurs sont classees du plus fonce au plus clair pour les palettes des
-#' valeurs positives et du plus clair au plus fonce pour les palettes des
-#' valeurs negatives.
-#'
-#' Le code des couleurs est le code hexadecimal.
-#'
-#' \itemize{ \item InseeFlash positives : "#9B231C", "#B24B1D", "#D47130",
-#' "#E4A75A", "#F2CE93" \item InseeFlash negatives :
-#' "#ECF1FA","#C9DAF0","#95BAE2","#5182B6","#005289" \item InseeAnalyse
-#' positives : "#5E2057","#853567","#8E5981","#BA97B2","#D7C0CC" \item
-#' InseeAnalyse negatives : "#ECF1FA","#C9DAF0","#95BAE2","#5182B6","#005289"
-#' \item InseeDossier positives :
-#' "#4F185E","#65317B","#9475A5","#BFA5C6","#E7D1E5" \item InseeDossier
-#' negatives : "#ECF1FA","#C9DAF0","#95BAE2","#5182B6","#005289" \item
-#' InseePremiere positives : "#7F0029","#CC1543","#DE635B","#F79C85","#FDE3DE"
-#' \item InseePremiere negatives :
-#' "#ECF4D8","#CDD78C","#91B778","#549534","#005941" \item defaut positives :
-#' "#5A0A14","#82141B","#9B231C","#B24B1D","#D47130","#E4A75A","#F2CE93" \item
-#' defaut negatives :
-#' "#C9DAF0","#95BAE2","#5182B6","#005289","#003269","#001E5A","#000050" }
+#' Le code des couleurs est le code hexadécimal. Pour récupérer les codes
+#' hexadécimaux des différentes palettes proposées : data("palettes_insee")
 #'
 #' @aliases set_couleur_ronds set_couleur_classes set_couleur_typo
 #' set_couleur_joignantes set_couleur_saphirs
 #'
-#' @usage set_couleur_ronds(map, colorPos = "#CD853F", colorNeg = "#6495ED",
+#' @usage set_couleur_ronds(map, colorPos = "#EB617F", colorNeg = "#286AC7",
 #' map_leaflet = NULL)
 #'
 #' set_couleur_classes(map, stylePalette = "defaut", palettePos = NULL,
@@ -1263,20 +1255,21 @@ NULL
 #' set_couleur_typo(map, paletteTypo = NULL, colBorder = "white", map_leaflet =
 #' NULL)
 #'
-#' set_couleur_joignantes(map, colFleche = "#CD853F", colBorder = "black",
+#' set_couleur_joignantes(map, colFleche = "#286AC7", colBorder = "black",
 #' map_leaflet = NULL)
 #'
-#' set_couleur_saphirs(map, colEntree = "#CD853F", colSortie = "#6495ED",
+#' set_couleur_saphirs(map, colEntree = "#EB617F", colSortie = "#286AC7",
 #' colBorder = "black", map_leaflet = NULL)
 #'
 #' @param map objet leaflet.
 #' @param colorPos chaine de caracteres (character). Couleur nommee ou
-#' hexadecimal. Par defaut "#CD853F".
+#' hexadecimal. Par defaut "#EB617F".
 #' @param colorNeg chaine de caracteres (character). Couleur nommee ou
-#' hexadecimal. Par defaut "#6495ED".
+#' hexadecimal. Par defaut "#286AC7".
 #' @param stylePalette chaine de caracteres (character). A choisir parmi
-#' "InseeFlash", "InseeAnalyse", "InseeDossier", "InseePremiere" ou "defaut"
-#' (par defaut).
+#' "defaut", "Insee_Rouge", "Insee_Jaune", "Insee_Bleu", "Insee_Turquoise",
+#' "Insee_Vert", "Insee_Violet" ou "Insee_Gris" (voir
+#' 'affiche_palette(nomPalette)').
 #' @param palettePos vecteur de caracteres (character). Specifier le vecteur de
 #' couleurs (nommees ou hexadecimal) des valeurs positives (au choix). Par
 #' defaut a NULL.
@@ -1290,11 +1283,11 @@ NULL
 #' exemple "white") ou hexadecimal (par exemple "#FFFFFF"). Par defaut "white"
 #' pour classes et typo, "black" pour joignantes et saphirs.
 #' @param colFleche chaine de caracteres (character). Couleur nommee ou
-#' hexadecimal. Par defaut "#CD853F".
+#' hexadecimal. Par defaut "#286AC7".
 #' @param colEntree chaine de caracteres (character). Couleur nommee ou
-#' hexadecimal. Par defaut "#CD853F".
+#' hexadecimal. Par defaut "#EB617F".
 #' @param colSortie chaine de caracteres (character). Couleur nommee ou
-#' hexadecimal. Par defaut "#6495ED".
+#' hexadecimal. Par defaut "#286AC7".
 #' @param map_leaflet objet leaflet. Pour l'integration des fonctions leaflet
 #' dans les applications shiny (cf vignette). Par defaut a NULL.
 #'
@@ -1332,7 +1325,7 @@ NULL
 #' # Ronds proportionnels sur une analyse en classes
 #' map <- leaflet_classes_ronds(data = donnees_monoloc, fondMaille = depm, idData = "COD_DEP",
 #' varVolume = "POP_2015", varRatio = "VAR_AN_MOY", nbClasses = 4)
-#' map <- set_couleur_classes(map = map, stylePalette = "InseePremiere", colBorder = "black")
+#' map <- set_couleur_classes(map = map, stylePalette = "Insee_Rouge", colBorder = "black")
 #' \donttest{
 #'  map
 #' }
@@ -1344,7 +1337,7 @@ NULL
 #' map <- leaflet_saphirs(data = donnees_biloc_saphirs, fondMaille = regm, typeMaille = "REG",
 #' idDataDepart = "REG_DEPART", idDataArrivee = "REG_ARRIVEE",
 #' varFlux = "MIGR", largeurFlecheMax = 500, direction = "Ent")
-#' map <- set_couleur_saphirs(map = map, colEntree = "#91B778", colBorder = "grey")
+#' map <- set_couleur_saphirs(map = map, colEntree = "#4BB375", colBorder = "grey")
 #' \donttest{
 #'  map
 #' }
@@ -1611,9 +1604,10 @@ NULL
 #' varFlux = "MIGR", direction = "Ent")
 #' }
 #'
-#' @import shinythemes shinyjs shinyBS leaflet sf ggplot2 classInt leaflet.extras utils dplyr
-#' @importFrom lwgeom st_geod_length
 #' @rawNamespace import(shiny, except = runExample)
+#' @import shinyBS shinythemes shinyjs leaflet sf ggplot2 classInt leaflet.extras utils dplyr
+#' @importFrom lwgeom st_geod_length
+#' @importFrom zip zip
 #'
 #' @export shiny_ronds
 #' @export shiny_classes
@@ -1643,9 +1637,11 @@ NULL
 #' - \code{donnees_biloc_saphirs} for sapphire arrows
 #'
 #' - \code{depm, regm, fram} for the meshes and contours of the maps
+#' 
+#' - \code{palettes_insee} for palette of the graphic chart of INSEE
 #'
 #' @aliases com_dep_13_30_83_84 donnees_a_facon donnees_monoloc donnees_biloc
-#' donnees_biloc_saphirs depm regm fram
+#' donnees_biloc_saphirs depm regm fram palettes_insee
 #'
 #' @docType data
 #'
@@ -1664,48 +1660,53 @@ NULL
 #' data("regm")
 #'
 #' data("fram")
+#' 
+#' data("palettes_insee")
 #'
 #' @format \code{com_dep_13_30_83_84} Un data frame de 792 observations et 3
-#' variables.  \describe{ \item{list("CODE")}{vecteur caracteres}
-#' \item{list("LIBELLE")}{vecteur caracteres}
-#' \item{list("geometry")}{sfc_GEOMETRY} }
+#' variables.  \describe{ \item{"CODE"}{vecteur caracteres}
+#' \item{"LIBELLE"}{vecteur caracteres}
+#' \item{"geometry"}{sfc_GEOMETRY} }
 #'
 #' Un data frame de 281 observations et 3 variables.  \describe{
-#' \item{list("DEPCOM")}{vecteur caracteres} \item{list("ZE2010")}{vecteur
-#' caracteres} \item{list("LIB_ZE2010")}{vecteur caracteres} }
+#' \item{"DEPCOM"}{vecteur caracteres} \item{"ZE2010"}{vecteur
+#' caracteres} \item{"LIB_ZE2010"}{vecteur caracteres} }
 #'
 #' \code{donnees_monoloc} Un data frame de 96 observations et 6 variables.
-#' \describe{ \item{list("COD_DEP")}{vecteur caracteres}
-#' \item{list("LIB_DEP")}{vecteur caracteres} \item{list("POP_2010")}{vecteur
-#' numerique} \item{list("POP_2015")}{vecteur numerique}
-#' \item{list("VAR_AN_MOY")}{vecteur numerique} \item{list("REG")}{vecteur
+#' \describe{ \item{"COD_DEP"}{vecteur caracteres}
+#' \item{"LIB_DEP"}{vecteur caracteres} \item{"POP_2010"}{vecteur
+#' numerique} \item{"POP_2015"}{vecteur numerique}
+#' \item{"VAR_AN_MOY"}{vecteur numerique} \item{"REG"}{vecteur
 #' caracteres} }
 #'
 #' \code{donnees_biloc} Un data frame de 378 observations et 3 variables.
-#' \describe{ \item{list("REG_DEPART")}{vecteur caracteres}
-#' \item{list("REG_ARRIVEE")}{vecteur caracteres} \item{list("MIGR")}{vecteur
+#' \describe{ \item{"REG_DEPART"}{vecteur caracteres}
+#' \item{"REG_ARRIVEE"}{vecteur caracteres} \item{"MIGR"}{vecteur
 #' numerique} }
 #'
 #' \code{donnees_biloc_saphirs} Un data frame de 21 observations et 3
-#' variables.  \describe{ \item{list("REG_DEPART")}{vecteur caracteres}
-#' \item{list("REG_ARRIVEE")}{vecteur caracteres} \item{list("MIGR")}{vecteur
+#' variables.  \describe{ \item{"REG_DEPART"}{vecteur caracteres}
+#' \item{"REG_ARRIVEE"}{vecteur caracteres} \item{"MIGR"}{vecteur
 #' numerique} }
 #'
 #' \code{depm} Un data frame de 96 observations et 5 variables.  \describe{
-#' \item{list("CODE")}{vecteur caracteres} \item{list("LIBELLE")}{vecteur
-#' caracteres} \item{list("REG")}{vecteur caracteres}
-#' \item{list("SURF")}{vecteur numerique} \item{list("geometry")}{sfc_GEOMETRY}
+#' \item{"CODE"}{vecteur caracteres} \item{"LIBELLE"}{vecteur
+#' caracteres} \item{"REG"}{vecteur caracteres}
+#' \item{"SURF"}{vecteur numerique} \item{"geometry"}{sfc_GEOMETRY}
 #' }
 #'
 #' \code{regm} Un data frame de 13 observations et 4 variables.  \describe{
-#' \item{list("CODE")}{vecteur caracteres} \item{list("LIBELLE")}{vecteur
-#' caracteres} \item{list("SURF")}{vecteur numerique}
-#' \item{list("geometry")}{sfc_GEOMETRY} }
+#' \item{"CODE"}{vecteur caracteres} \item{"LIBELLE"}{vecteur
+#' caracteres} \item{"SURF"}{vecteur numerique}
+#' \item{"geometry"}{sfc_GEOMETRY} }
 #'
 #' \code{fram} Un data frame de 1 observation et 4 variables.  \describe{
-#' \item{list("CODE")}{vecteur caracteres} \item{list("LIBELLE")}{vecteur
-#' caracteres} \item{list("SURF")}{vecteur numerique}
-#' \item{list("geometry")}{sfc_GEOMETRY} }
+#' \item{"CODE"}{vecteur caracteres} \item{"LIBELLE"}{vecteur
+#' caracteres} \item{"SURF"}{vecteur numerique}
+#' \item{"geometry"}{sfc_GEOMETRY} }
+#' 
+#' \code{palettes_insee} Une liste de vecteurs caracteres.  \describe{
+#' \item{"nomPalette"}{vecteur caracteres de codes hexadecimaux} }
 #'
 #' @keywords datasets
 #'
@@ -1719,6 +1720,7 @@ NULL
 #' data(depm)
 #' data(regm)
 #' data(fram)
+#' data(palettes_insee)
 #'
 NULL
 

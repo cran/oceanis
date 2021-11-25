@@ -1,7 +1,17 @@
 
-# oceanis-package (version 1.7.5.2)
+# oceanis-package (version 1.8.4)
+
+<!-- badges: start -->
 [![Mentioned in Awesome Official Statistics ](https://awesome.re/mentioned-badge.svg)](https://github.com/SNStatComp/awesome-official-statistics-software)
+[![CRAN status](https://www.r-pkg.org/badges/version/oceanis)](https://cran.r-project.org/package=oceanis)
+[![CRAN checks](https://cranchecks.info/badges/worst/oceanis)](https://cran.r-project.org/web/checks/check_results_oceanis.html) 
 [![](https://cranlogs.r-pkg.org/badges/oceanis?color=brightgreen)](https://cran.r-project.org/package=oceanis)
+[![](https://cranlogs.r-pkg.org/badges/grand-total/oceanis?color=brightgreen)](https://cran.r-project.org/package=oceanis)
+[![lifecycle](https://img.shields.io/badge/lifecycle-stable-green.svg)](https://lifecycle.r-lib.org/articles/stages.html)
+[![R build status](https://github.com/insee-psar-at/oceanis-package/workflows/R/badge.svg)](https://github.com/insee-psar-at/oceanis-package/actions)
+[![License](http://img.shields.io/badge/license-GPL%20%28%3E=%202%29-brightgreen.svg?style=flat)](http://www.gnu.org/licenses/gpl-2.0.html)
+[![minimal R version](https://img.shields.io/badge/R%3E%3D-3.6.0-6666ff.svg)](https://cran.r-project.org/)
+<!-- badges: end -->
 
 Le package _oceanis_ permet de réaliser des cartes d'analyses. Il propose plusieurs représentations cartographiques possibles :
 + ronds proportionnels
@@ -34,8 +44,9 @@ L'aide du package et la vignette proposent des exemples de réalisation de carte
 
 La vignette propose notamment un exemple de scénario de réalisation de cartes depuis le chargement des données et des fonds jusqu'à son exportation en fichier image ou en projet Qgis.
 
-Pour installer le package _oceanis_ sur poste depuis GitLab et le charger dans R :
+Pour installer le package _oceanis_ depuis GitLab et le charger dans R :
 ```r
+# install.packages("remotes")
 remotes::install_gitlab(
      repo = "psar-at/unite-ced/oceanis-package",
      host = "gitlab.insee.fr",
@@ -47,19 +58,6 @@ library(oceanis)
 ou à partir du CRAN :
 ```r
 install.packages("oceanis")
-library(oceanis)
-```
-Pour installer le package _oceanis_ sur AUS :
-```r
-#install.packages("remotes", type = "source")
-
-    remotes::install_gitlab(
-    repo = "psar-at/unite-ced/oceanis-package-aus",
-    host = "gitlab.insee.fr", 
-    upgrade = "never",
-    build = FALSE,
-    dependencies = TRUE
-    )
 library(oceanis)
 ```
 
