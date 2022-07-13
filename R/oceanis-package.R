@@ -255,7 +255,8 @@ NULL
 #'  ## End(Not run)
 #' }
 #'
-#' @import mapview
+#' @importFrom htmlwidgets saveWidget
+#' @importFrom webshot webshot
 #'
 #' @export export_jpeg
 #' @export export_pdf
@@ -347,7 +348,8 @@ NULL
 #'  ## End(Not run)
 #' }
 #'
-#' @import leaflet sf utils stringr
+#' @import leaflet sf stringr
+#' @importFrom utils write.csv
 #'
 #' @export export_qgis_ronds
 #' @export export_qgis_classes
@@ -672,7 +674,7 @@ NULL
 #'
 #' \code{\link{coord_legende},}
 #'
-#' \code{\link{add_source}, \link{add_titre}, \link{add_fond_osm},}
+#' \code{\link{add_source}, \link{add_titre},}
 #'
 #' \code{\link{set_fonds_simples},}
 #'
@@ -1605,8 +1607,10 @@ NULL
 #' }
 #'
 #' @rawNamespace import(shiny, except = runExample)
-#' @import shinyBS shinythemes shinyjs leaflet sf ggplot2 classInt leaflet.extras utils dplyr
+#' @import shinythemes shinyjs leaflet sf ggplot2 classInt leaflet.extras dplyr
+#' @importFrom shinyBS bsButton updateButton
 #' @importFrom lwgeom st_geod_length
+#' @importFrom utils write.csv
 #' @importFrom zip zip
 #'
 #' @export shiny_ronds

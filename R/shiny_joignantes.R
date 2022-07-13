@@ -72,7 +72,9 @@ function(data,fondMaille,typeMaille,fondContour,fondSuppl=NULL,idDataDepart,idDa
     {
       names(fondEtranger)[1] <- "CODE"
       names(fondEtranger)[2] <- "LIBGEO"
-      fondEtranger$LIBGEO<-iconv(fondEtranger$LIBGEO,"latin1","utf8")
+      if(any(Encoding(fondEtranger$LIBGEO) %in% "latin1")){
+        fondEtranger$LIBGEO<-iconv(fondEtranger$LIBGEO,"latin1","UTF-8")
+      }
 
       if(substr(st_crs(fondEtranger)[1]$input,1,5) == "EPSG:")
       {
@@ -91,11 +93,17 @@ function(data,fondMaille,typeMaille,fondContour,fondSuppl=NULL,idDataDepart,idDa
     {
       names(fondSuppl)[1] <- "CODE"
       names(fondSuppl)[2] <- "LIBELLE"
-      fondSuppl$LIBELLE<-iconv(fondSuppl$LIBELLE,"latin1","utf8")
+      if(any(Encoding(fondSuppl$LIBELLE) %in% "latin1")){
+        fondSuppl$LIBELLE<-iconv(fondSuppl$LIBELLE,"latin1","UTF-8")
+      }
     }
 
-    fondMaille$LIBELLE<-iconv(fondMaille$LIBELLE,"latin1","utf8")
-    fondContour$LIBELLE<-iconv(fondContour$LIBELLE,"latin1","utf8")
+    if(any(Encoding(fondMaille$LIBELLE) %in% "latin1")){
+      fondMaille$LIBELLE<-iconv(fondMaille$LIBELLE,"latin1","UTF-8")
+    }
+    if(any(Encoding(fondContour$LIBELLE) %in% "latin1")){
+      fondContour$LIBELLE<-iconv(fondContour$LIBELLE,"latin1","UTF-8")
+    }
 
     ui <- navbarPage("OCEANIS", id="menu",
 
@@ -679,7 +687,8 @@ function(data,fondMaille,typeMaille,fondContour,fondSuppl=NULL,idDataDepart,idDa
 
         analyse_WGS84 <- st_as_sf(analyse_WGS84)
 
-        analyse_WGS84 <- analyse_WGS84[as.vector(st_length(analyse_WGS84)/2.2)<=distance_max_fj()*1000,]
+        st_agr(analyse_WGS84) <- "constant"
+        analyse_WGS84 <- analyse_WGS84[as.vector(st_length(st_cast(analyse_WGS84,"LINESTRING"))/2.2)<=distance_max_fj()*1000,]
 
         analyse_WGS84 <- analyse_WGS84[as.data.frame(analyse_WGS84)[,varFlux]>=flux_min_fj(),]
 

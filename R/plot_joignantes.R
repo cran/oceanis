@@ -74,7 +74,9 @@ function(data,fondMaille,fondSousAnalyse=NULL,fondSurAnalyse=NULL,typeMaille,idD
       {
         names(fondSousAnalyse[[i]])[1] <- "CODE"
         names(fondSousAnalyse[[i]])[2] <- "LIBELLE"
-        fondSousAnalyse[[i]]$LIBELLE<-iconv(fondSousAnalyse[[i]]$LIBELLE,"latin1","utf8")
+        if(any(Encoding(fondSousAnalyse[[i]]$LIBELLE) %in% "latin1")){
+          fondSousAnalyse[[i]]$LIBELLE<-iconv(fondSousAnalyse[[i]]$LIBELLE,"latin1","UTF-8")
+        }
       }
     }
     if(!is.null(fondSurAnalyse))
@@ -83,21 +85,31 @@ function(data,fondMaille,fondSousAnalyse=NULL,fondSurAnalyse=NULL,typeMaille,idD
       {
         names(fondSurAnalyse[[i]])[1] <- "CODE"
         names(fondSurAnalyse[[i]])[2] <- "LIBELLE"
-        fondSurAnalyse[[i]]$LIBELLE<-iconv(fondSurAnalyse[[i]]$LIBELLE,"latin1","utf8")
+        if(any(Encoding(fondSurAnalyse[[i]]$LIBELLE) %in% "latin1")){
+          fondSurAnalyse[[i]]$LIBELLE<-iconv(fondSurAnalyse[[i]]$LIBELLE,"latin1","UTF-8")
+        }
       }
     }
-    fondMaille$LIBELLE<-iconv(fondMaille$LIBELLE,"latin1","utf8")
+    if(any(Encoding(fondMaille$LIBELLE) %in% "latin1")){
+      fondMaille$LIBELLE<-iconv(fondMaille$LIBELLE,"latin1","UTF-8")
+    }
     if(titreLeg!="")
     {
-      titreLeg<-iconv(titreLeg,"latin1","utf8")
+      if(any(Encoding(titreLeg) %in% "latin1")){
+        titreLeg<-iconv(titreLeg,"latin1","UTF-8")
+      }
     }
     if(titreCarte!="")
     {
-      titreCarte<-iconv(titreCarte,"latin1","utf8")
+      if(any(Encoding(titreCarte) %in% "latin1")){
+        titreCarte<-iconv(titreCarte,"latin1","UTF-8")
+      }
     }
     if(sourceCarte!="")
     {
-      sourceCarte<-iconv(sourceCarte,"latin1","utf8")
+      if(any(Encoding(sourceCarte) %in% "latin1")){
+        sourceCarte<-iconv(sourceCarte,"latin1","UTF-8")
+      }
     }
 
     code_epsg <- switch(emprise, #emprise
@@ -151,7 +163,9 @@ function(data,fondMaille,fondSousAnalyse=NULL,fondSurAnalyse=NULL,typeMaille,idD
     fond_joignantes <- st_as_sf(fond_joignantes)
 
     fond_joignantes_WGS84 <- st_transform(fond_joignantes, crs = 4326)
-    fond_joignantes <- fond_joignantes[as.vector(st_length(fond_joignantes_WGS84)/2.2)<=filtreDist*1000,]
+    
+    st_agr(fond_joignantes_WGS84) <- "constant"
+    fond_joignantes <- fond_joignantes[as.vector(st_length(st_cast(fond_joignantes_WGS84,"LINESTRING"))/2.2)<=filtreDist*1000,]
     rm(fond_joignantes_WGS84)
 
     fond_joignantes <- fond_joignantes[as.data.frame(fond_joignantes)[,varFlux]>=filtreVol,]
@@ -180,11 +194,15 @@ function(data,fondMaille,fondSousAnalyse=NULL,fondSurAnalyse=NULL,typeMaille,idD
 
     donnees <- donnees[rev(order(donnees[,varFlux])),]
 
-    vmax <- max(donnees[,varFlux])
-
-    coord_fleche_max_pl <- st_coordinates(fond_joignantes[abs(as.data.frame(fond_joignantes)[,varFlux])==vmax,])
-    large_pl <- max(st_distance(st_sfc(st_point(c(coord_fleche_max_pl[2,1],coord_fleche_max_pl[2,2])),st_point(c(coord_fleche_max_pl[6,1],coord_fleche_max_pl[6,2])))))
-
+    if(nrow(donnees) > 0){
+      vmax <- max(donnees[,varFlux])
+      coord_fleche_max_pl <- st_coordinates(fond_joignantes[abs(as.data.frame(fond_joignantes)[,varFlux])==vmax,])
+      large_pl <- max(st_distance(st_sfc(st_point(c(coord_fleche_max_pl[2,1],coord_fleche_max_pl[2,2])),st_point(c(coord_fleche_max_pl[6,1],coord_fleche_max_pl[6,2])))))
+    }else{
+      vmax <- 0
+      large_pl <- 0
+    }
+    
     long_pl <- large_pl*2
 
     flux_leg <- fleche_legende(fond_points_WGS84$lng,fond_points_WGS84$lat,long_pl,large_pl,vmax,code_epsg)[[5]]

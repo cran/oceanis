@@ -14,14 +14,18 @@ function(data,fondMaille,typeMaille,fondSuppl=NULL,idDataDepart,idDataArrivee,va
     {
       names(fondSuppl)[1] <- "CODE"
       names(fondSuppl)[2] <- "LIBELLE"
-      fondSuppl$LIBELLE<-iconv(fondSuppl$LIBELLE,"latin1","utf8")
+      if(any(Encoding(fondSuppl$LIBELLE) %in% "latin1")){
+        fondSuppl$LIBELLE<-iconv(fondSuppl$LIBELLE,"latin1","UTF-8")
+      }
     }
     epsg_etranger <- NULL
     if(!is.null(fondEtranger))
     {
       names(fondEtranger)[1] <- "CODE"
       names(fondEtranger)[2] <- "LIBELLE"
-      fondEtranger$LIBELLE<-iconv(fondEtranger$LIBELLE,"latin1","utf8")
+      if(any(Encoding(fondEtranger$LIBELLE) %in% "latin1")){
+        fondEtranger$LIBELLE<-iconv(fondEtranger$LIBELLE,"latin1","UTF-8")
+      }
 
       if(substr(st_crs(fondEtranger)[1]$input,1,5) == "EPSG:")
       {
@@ -36,7 +40,9 @@ function(data,fondMaille,typeMaille,fondSuppl=NULL,idDataDepart,idDataArrivee,va
         epsg_etranger <- "3395" # Mercator
       }
     }
-    fondMaille$LIBELLE<-iconv(fondMaille$LIBELLE,"latin1","utf8")
+    if(any(Encoding(fondMaille$LIBELLE) %in% "latin1")){
+      fondMaille$LIBELLE<-iconv(fondMaille$LIBELLE,"latin1","UTF-8")
+    }
 
     if(!is.null(map_proxy))
     {
@@ -152,7 +158,7 @@ function(data,fondMaille,typeMaille,fondSuppl=NULL,idDataDepart,idDataArrivee,va
     large_pl <- as.numeric(max(st_distance(st_sfc(st_point(c(coord_fleche_max_pl[2,1],coord_fleche_max_pl[2,2])),st_point(c(coord_fleche_max_pl[6,1],coord_fleche_max_pl[6,2])), crs = code_epsg))))
 
     # Construction de la map par defaut
-    if(is.null(map_proxy) | (!is.null(map_proxy) & class(map_proxy)=="character"))
+    if(is.null(map_proxy) | (!is.null(map_proxy) & inherits(map_proxy,"character")))
     {
       if(is.null(fondEtranger))
       {

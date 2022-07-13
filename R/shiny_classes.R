@@ -63,14 +63,18 @@ function(data,fondMaille,fondMailleElargi=NULL,fondContour,fondSuppl=NULL,idData
     {
       names(fondMailleElargi)[1] <- "CODE"
       names(fondMailleElargi)[2] <- "LIBELLE"
-      fondMailleElargi$LIBELLE<-iconv(fondMailleElargi$LIBELLE,"latin1","utf8")
+      if(any(Encoding(fondMailleElargi$LIBELLE) %in% "latin1")){
+        fondMailleElargi$LIBELLE<-iconv(fondMailleElargi$LIBELLE,"latin1","UTF-8")
+      }
     }
     epsg_etranger <- NULL
     if(!is.null(fondEtranger))
     {
       names(fondEtranger)[1] <- "CODE"
       names(fondEtranger)[2] <- "LIBGEO"
-      fondEtranger$LIBGEO<-iconv(fondEtranger$LIBGEO,"latin1","utf8")
+      if(any(Encoding(fondEtranger$LIBGEO) %in% "latin1")){
+        fondEtranger$LIBGEO<-iconv(fondEtranger$LIBGEO,"latin1","UTF-8")
+      }
 
       if(substr(st_crs(fondEtranger)[1]$input,1,5) == "EPSG:")
       {
@@ -89,11 +93,17 @@ function(data,fondMaille,fondMailleElargi=NULL,fondContour,fondSuppl=NULL,idData
     {
       names(fondSuppl)[1] <- "CODE"
       names(fondSuppl)[2] <- "LIBELLE"
-      fondSuppl$LIBELLE<-iconv(fondSuppl$LIBELLE,"latin1","utf8")
+      if(any(Encoding(fondSuppl$LIBELLE) %in% "latin1")){
+        fondSuppl$LIBELLE<-iconv(fondSuppl$LIBELLE,"latin1","UTF-8")
+      }
     }
 
-    fondMaille$LIBELLE<-iconv(fondMaille$LIBELLE,"latin1","utf8")
-    fondContour$LIBELLE<-iconv(fondContour$LIBELLE,"latin1","utf8")
+    if(any(Encoding(fondMaille$LIBELLE) %in% "latin1")){
+      fondMaille$LIBELLE<-iconv(fondMaille$LIBELLE,"latin1","UTF-8")
+    }
+    if(any(Encoding(fondContour$LIBELLE) %in% "latin1")){
+      fondContour$LIBELLE<-iconv(fondContour$LIBELLE,"latin1","UTF-8")
+    }
 
     ui <- navbarPage("OCEANIS", id="menu",
 
@@ -278,9 +288,9 @@ function(data,fondMaille,fondMailleElargi=NULL,fondContour,fondSuppl=NULL,idData
 
         output$distribution_variable_ac <- renderUI({
           
-          bsButton(inputId="distribution_variable_ac_id",label="Distribution de la variable", style="btn btn-info", icon = icon("chart-bar"),
-                   type = "toggle", block = FALSE, disabled = FALSE,
-                   value = FALSE)
+          shinyBS::bsButton(inputId="distribution_variable_ac_id",label="Distribution de la variable", style="btn btn-info", icon = icon("chart-bar"),
+                            type = "toggle", block = FALSE, disabled = FALSE,
+                            value = FALSE)
         })
 
         observeEvent(input$distribution_variable_ac_id,{
@@ -362,7 +372,7 @@ function(data,fondMaille,fondMailleElargi=NULL,fondContour,fondSuppl=NULL,idData
         })
 
         output$valid_bornes_ac <- renderUI({
-          actionButton("valid_bornes_ac_id",label="Rafraichir la carte", icon=icon("refresh"), style="color: #fff; background-color: #337ab7; border-color: #2e6da4")
+          actionButton("valid_bornes_ac_id",label="Rafraichir la carte", icon=icon("sync"), style="color: #fff; background-color: #337ab7; border-color: #2e6da4")
         })
 
         # LEGENDE

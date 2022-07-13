@@ -61,7 +61,7 @@ ze13 <- zonage_a_facon(fondMaille = com_dep_13_30_83_84,
                        idMaille = "DEPCOM",
                        idGroupe = "ZE2010",
                        libGroupe = "LIB_ZE2010",
-                       fondContour = depm[depm$code=="13",])
+                       fondContour = depm[depm$CODE=="13",])
 
 # visualisation de la geometrie
 # modification des marges
@@ -121,7 +121,7 @@ plot(sf::st_geometry(ze13etplus),
 #                      stringsAsFactors = FALSE)
 #  
 #  shiny_classes_ronds(data = donnees_monoloc,
-#                      fondMaille = depm[depm$reg %in% c("93","94"),],
+#                      fondMaille = depm[depm$REG %in% c("93","94"),],
 #                      fondMailleElargi = depm,
 #                      fondContour = fram,
 #                      fondSuppl = regm,
@@ -194,7 +194,7 @@ regm <- sf::st_read(dsn = system.file("extdata",
 
 # affichage de la carte
 map <- leaflet_ronds_classes(data = donnees_monoloc,
-                             fondMaille = depm[depm$reg=="93",],
+                             fondMaille = depm[depm$REG=="93",],
                              fondMailleElargi = depm,
                              fondSuppl = regm,
                              idData = "COD_DEP",
@@ -206,7 +206,7 @@ rayon_ronds(map)
 
 # affichage de la carte avec des rayons de ronds plus grands
 map <- leaflet_ronds_classes(data = donnees_monoloc,
-                             fondMaille = depm[depm$reg == "93",],
+                             fondMaille = depm[depm$REG == "93",],
                              fondMailleElargi = depm,
                              fondSuppl = regm,
                              idData = "COD_DEP",
@@ -263,8 +263,7 @@ map <- set_couleur_classes(map = map,
 map <- set_opacite_elargi(map = map,
                           opacite = 0.3)
 
-# ajout d'un fond OpenStreetMap
-map <- add_fond_osm(map)
+map
 
 ## ----plotSaphirs, fig.height = 6, fig.width = 7-------------------------------
 library(oceanis)
@@ -316,7 +315,7 @@ fond_saphirs <- plot_saphirs(data = donnees_biloc_saphirs,
 
 # construction de la table des etiquettes
 etiquettes <- coordonnees_etiquettes(fondMaille = regm,
-                                     listeCode = as.character(regm$code))
+                                     listeCode = as.character(regm$CODE))
 # modification des valeurs (latitude Y, longitude X, taille, couleur et style de police)
 etiquettes[etiquettes$CODE=="24","Y"] <- 6680000
 etiquettes[etiquettes$CODE=="27","Y"] <- 6660000
@@ -467,7 +466,7 @@ fond_saphirs <- plot_saphirs(data = donnees_biloc_saphirs,
 #  
 #  # affichage de la carte avec des rayons de ronds plus grands
 #  map <- leaflet_ronds_classes(data = donnees_monoloc,
-#                               fondMaille = depm[depm$reg == "93",],
+#                               fondMaille = depm[depm$REG == "93",],
 #                               fondMailleElargi = depm,
 #                               fondSuppl = regm,
 #                               idData = "COD_DEP",

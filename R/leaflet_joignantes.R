@@ -14,14 +14,18 @@ function(data,fondMaille,typeMaille,fondSuppl=NULL,idDataDepart,idDataArrivee,va
     {
       names(fondSuppl)[1] <- "CODE"
       names(fondSuppl)[2] <- "LIBELLE"
-      fondSuppl$LIBELLE<-iconv(fondSuppl$LIBELLE,"latin1","utf8")
+      if(any(Encoding(fondSuppl$LIBELLE) %in% "latin1")){
+        fondSuppl$LIBELLE<-iconv(fondSuppl$LIBELLE,"latin1","UTF-8")
+      }
     }
     epsg_etranger <- NULL
     if(!is.null(fondEtranger))
     {
       names(fondEtranger)[1] <- "CODE"
       names(fondEtranger)[2] <- "LIBELLE"
-      fondEtranger$LIBELLE<-iconv(fondEtranger$LIBELLE,"latin1","utf8")
+      if(any(Encoding(fondEtranger$LIBELLE) %in% "latin1")){
+        fondEtranger$LIBELLE<-iconv(fondEtranger$LIBELLE,"latin1","UTF-8")
+      }
 
       if(substr(st_crs(fondEtranger)[1]$input,1,5) == "EPSG:")
       {
@@ -36,7 +40,9 @@ function(data,fondMaille,typeMaille,fondSuppl=NULL,idDataDepart,idDataArrivee,va
         epsg_etranger <- "3395" # Mercator
       }
     }
-    fondMaille$LIBELLE<-iconv(fondMaille$LIBELLE,"latin1","utf8")
+    if(any(Encoding(fondMaille$LIBELLE) %in% "latin1")){
+      fondMaille$LIBELLE<-iconv(fondMaille$LIBELLE,"latin1","UTF-8")
+    }
 
     if(!is.null(map_proxy))
     {
@@ -159,7 +165,8 @@ function(data,fondMaille,typeMaille,fondSuppl=NULL,idDataDepart,idDataArrivee,va
 
     analyse_WGS84 <- st_as_sf(analyse_WGS84)
 
-    analyse_WGS84 <- analyse_WGS84[as.vector(st_length(analyse_WGS84))/2.2<=filtreDist*1000,]
+    st_agr(analyse_WGS84) <- "constant"
+    analyse_WGS84 <- analyse_WGS84[as.vector(st_length(st_cast(analyse_WGS84,"LINESTRING"))/2.2)<=filtreDist*1000,]
 
     analyse_WGS84 <- analyse_WGS84[as.data.frame(analyse_WGS84)[,varFlux]>=filtreVol,]
 
@@ -169,12 +176,16 @@ function(data,fondMaille,typeMaille,fondSuppl=NULL,idDataDepart,idDataArrivee,va
 
     donnees <- donnees[rev(order(donnees[,varFlux])),]
 
-    coord_fleche_max_pl <- st_coordinates(analyse[[1]][abs(data.frame(analyse[[1]])[,varFlux])==max(donnees[,varFlux]),])
-    large_pl <- as.numeric(max(st_distance(st_sfc(st_point(c(coord_fleche_max_pl[2,1],coord_fleche_max_pl[2,2])),st_point(c(coord_fleche_max_pl[6,1],coord_fleche_max_pl[6,2])), crs = code_epsg))))
-
+    if(nrow(donnees) > 0){
+      coord_fleche_max_pl <- st_coordinates(analyse[[1]][abs(data.frame(analyse[[1]])[,varFlux])==max(donnees[,varFlux]),])
+      large_pl <- as.numeric(max(st_distance(st_sfc(st_point(c(coord_fleche_max_pl[2,1],coord_fleche_max_pl[2,2])),st_point(c(coord_fleche_max_pl[6,1],coord_fleche_max_pl[6,2])), crs = code_epsg))))
+    }else{
+      large_pl <- 0
+    }
+    
     # Construction de la map par defaut
 
-    if(is.null(map_proxy) | (!is.null(map_proxy) & class(map_proxy)=="character"))
+    if(is.null(map_proxy) | (!is.null(map_proxy) & inherits(map_proxy,"character")))
     {
       if(is.null(fondEtranger))
       {
